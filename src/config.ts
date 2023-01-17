@@ -3,4 +3,4 @@
 
 export const SITE_TITLE = 'AhogeK的个人博客';
 export const SITE_DESCRIPTION = '欢迎来到我的网站!👏';
-export const HOMEPAGE_URL = 'http://ahogek.com';
+export const HOMEPAGE_URL = 'http://blob.ahogek.com';
