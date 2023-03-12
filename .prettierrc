@@ -1,7 +1,17 @@
+# arrowParens: 'avoid'：表示如果箭头函数只有一个参数，并且没有默认值，那么不使用括号；否则使用括号。例如，x => x * 2 不使用括号，而 (x, y) => x + y 使用括号。
 arrowParens: 'avoid'
+# singleQuote: true：定义是否使用单引号作为字符串的标识符。如果该属性为 true，则使用单引号作为字符串的标识符，例如：const str = 'hello world';。
+# 否则使用双引号作为字符串的标识符，例如：const str = "hello world";。
 singleQuote: true
+# bracketSpacing: true：定义是否在对象字面量的属性之间使用空格。如果该属性为 true，则在对象字面量的属性之间使用空格，
+# 例如：{foo: 'bar'}。否则不使用空格，例如：{ foo: 'bar' }。
 bracketSpacing: true
+# endOfLine: 'lf'：定义换行符的类型。如果该属性为 'lf'，则使用 LF 换行符。否则使用 CRLF 换行符。
 endOfLine: 'lf'
+# semi: false：定义是否在语句结尾使用分号。如果该属性为 false，则不使用分号，例如：console.log('hello world')。
+# 否则使用分号，例如：console.log('hello world');。
 semi: false
 tabWidth: 2
+# trailingComma: 'none'：定义是否在多行结尾添加逗号。如果该属性为 'none'，则不添加逗号，
+# 例如：const arr = [1, 2, 3]。否则在多行结尾添加逗号，例如：const arr = [1, 2, 3,]。
 trailingComma: 'none'
