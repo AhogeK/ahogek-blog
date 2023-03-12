@@ -1,12 +1,15 @@
+# 这个配置文件的作用是让 ESLint 可以对 TypeScript 代码和 Astro 组件文件进行语法检查，
+# 并使用 Astro 推荐的代码规范来对代码进行格式化。通过配置 ESLint，可以帮助开发人员
+# 在开发过程中更加规范地编写代码，提高代码的质量和可维护性。
 root: true
-parser: '@typescript-eslint/parser'
+parser: '@typescript-eslint/parser' # 使用 @typescript-eslint/parser 解析器解析 TypeScript 代码。
 extends:
-  - plugin:astro/recommended
+  - plugin:astro/recommended # 扩展了名为 astro/recommended 的推荐规则集。
 overrides:
   - files:
-      - "*.astro"
-    parser: astro-eslint-parser
+      - "*.astro" # 对 Astro 组件文件（后缀名为 .astro）进行特殊处理。
+    parser: astro-eslint-parser # 使用 astro-eslint-parser 解析器解析 Astro 组件文件。
     parserOptions:
-      parser: "@typescript-eslint/parser"
+      parser: "@typescript-eslint/parser" # 使用 @typescript-eslint/parser 解析器解析 TypeScript 代码。
       extraFileExtensions:
-        - ".astro"
+        - ".astro" # 允许使用 .astro 扩展名的文件，以便 ESLint 在 Astro 组件文件中使用 @typescript-eslint/parser 解析 TypeScript 代码。
