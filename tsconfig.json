@@ -6,7 +6,7 @@
    */
   "extends": "astro/tsconfigs/strict",
   // 表示编译器的选项和特性
-  "compilerOptions": {
+"compilerOptions": {
     // 使用哪种 JSX 编译器。在这里设置为 react，表示使用 React 的 JSX 编译器。
     "jsx": "react",
     /*
