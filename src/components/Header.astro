@@ -8,7 +8,9 @@ import {
   IoBook,
   IoPersonCircleSharp
 } from 'react-icons/io5/index.js'
+import { BsFillChatRightHeartFill } from 'react-icons/bs/index.js'
 import FootprintIcon from './icons/footprint'
+import ThemeToggle from './ThemeToggleButton'
 ---
 
 <!-- 
@@ -42,7 +44,7 @@ import FootprintIcon from './icons/footprint'
         <h2
           class="font-semibold tracking-tighter p-2 font-mplus text-lg flex items-center"
         >
-          <FootprintIcon />
+          <BsFillChatRightHeartFill />
           <span class="mr-1"></span>
           {SITE_TITLE}
         </h2>
@@ -69,6 +71,7 @@ import FootprintIcon from './icons/footprint'
         flex-1: 将元素的宽度设置为1。
        -->
       <div class="flex-1"></div>
+      <ThemeToggle client:load />
     </nav>
   </div>
 </header>
