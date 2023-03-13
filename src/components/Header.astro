@@ -1,25 +1,61 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../config';
+import HeaderLink from './HeaderLink.astro'
+import { SITE_TITLE } from '../config'
+import { IoLogoGithub, IoLogoTwitter, IoHome, IoBook, IoPersonCircleSharp } from 'react-icons/io5/index.js'
 ---
 
-<header>
-	<h2>
-		{SITE_TITLE}
-	</h2>
-	<nav>
-		<HeaderLink href="/">Home</HeaderLink>
-		<HeaderLink href="/blog">Blog</HeaderLink>
-		<HeaderLink href="/about">About</HeaderLink>
-		<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
-		<HeaderLink href="https://github.com/withastro/astro" target="_blank">GitHub</HeaderLink>
-	</nav>
+<!-- 
+  fixed: 将元素定位为固定位置，即不会随着页面滚动而改变位置。
+  w-full: 将元素宽度设置为100%。
+  p-2: 将元素的内边距设置为2。
+  z-20: 将元素的层级设置为20。
+  backdrop-blur-md: 使用后景模糊效果，将元素的背景模糊化，模糊程度为中等。
+ -->
+<header class="fixed w-full p-2 z-20 backdrop-blur-md">
+  <!-- 
+    mx-auto: 将元素在水平方向上居中对齐。
+    max-w-3xl: 将元素最大宽度设置为3倍的额外大型屏幕宽度。
+   -->
+  <div class="mx-auto max-w-3xl">
+    <!-- 
+      flex: 将元素设置为flex布局。
+      items-center: 将元素在垂直方向上居中对齐。
+      gap-3: 设置元素之间的间距为3。
+      text-base: 将元素的字体大小设置为基础大小。通常为16px。
+     -->
+    <nav class="flex items-center gap-3 text-base">
+      <!-- 
+        font-semibold: 将元素的字体粗细设置为中等。
+        tracking-tighter: 将元素的字间距设置为更紧凑。
+        p-2: 将元素的内边距设置为2。
+        font-mplus: 将元素的字体设置为M+字体。
+        text-lg: 将元素的字体大小设置为大号。
+       -->
+      <h2 class="font-semibold tracking-tighter p-2 font-mplus text-lg">
+        {SITE_TITLE}
+      </h2>
+      <!-- 
+        flex-1: 将元素的宽度设置为1。
+        items-center: 将元素在垂直方向上居中对齐。
+        gap-6: 设置元素之间的间距为6。
+        hidden: 将元素隐藏。
+        md:flex: 将元素在中等屏幕及以上的屏幕上显示。
+       -->
+      <div class="items-center gap-6 hidden md:flex">
+        <HeaderLink href="/"><IoHome /> 首页</HeaderLink>
+        <HeaderLink href="/blog"><IoBook /> 文章</HeaderLink>
+        <HeaderLink href="/about"><IoPersonCircleSharp /> 关于我</HeaderLink>
+        <HeaderLink href="https://twitter.com/AhogeKnight" target="_blank">
+          <IoLogoTwitter /> Twitter
+        </HeaderLink>
+        <HeaderLink href="https://github.com/AhogeK" target="_blank">
+          <IoLogoGithub /> Github
+        </HeaderLink>
+      </div>
+      <!-- 
+        flex-1: 将元素的宽度设置为1。
+       -->
+      <div class="flex-1"></div>
+    </nav>
+  </div>
 </header>
-<style>
-	header {
-		margin: 0em 0 2em;
-	}
-	h2 {
-		margin: 0.5em 0;
-	}
-</style>
