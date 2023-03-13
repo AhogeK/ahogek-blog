@@ -1,7 +1,14 @@
 ---
 import HeaderLink from './HeaderLink.astro'
 import { SITE_TITLE } from '../config'
-import { IoLogoGithub, IoLogoTwitter, IoHome, IoBook, IoPersonCircleSharp } from 'react-icons/io5/index.js'
+import {
+  IoLogoGithub,
+  IoLogoTwitter,
+  IoHome,
+  IoBook,
+  IoPersonCircleSharp
+} from 'react-icons/io5/index.js'
+import FootprintIcon from './icons/footprint'
 ---
 
 <!-- 
@@ -24,16 +31,22 @@ import { IoLogoGithub, IoLogoTwitter, IoHome, IoBook, IoPersonCircleSharp } from
       text-base: 将元素的字体大小设置为基础大小。通常为16px。
      -->
     <nav class="flex items-center gap-3 text-base">
-      <!-- 
+      <a href="/" class="group">
+        <!-- 
         font-semibold: 将元素的字体粗细设置为中等。
         tracking-tighter: 将元素的字间距设置为更紧凑。
         p-2: 将元素的内边距设置为2。
         font-mplus: 将元素的字体设置为M+字体。
         text-lg: 将元素的字体大小设置为大号。
        -->
-      <h2 class="font-semibold tracking-tighter p-2 font-mplus text-lg">
-        {SITE_TITLE}
-      </h2>
+        <h2
+          class="font-semibold tracking-tighter p-2 font-mplus text-lg flex items-center"
+        >
+          <FootprintIcon />
+          <span class="mr-1"></span>
+          {SITE_TITLE}
+        </h2>
+      </a>
       <!-- 
         flex-1: 将元素的宽度设置为1。
         items-center: 将元素在垂直方向上居中对齐。
