@@ -37,7 +37,7 @@
 ## 什么是 Astro 框架
 
 Astro 是一种 Web 开发框架，它使用了现代前端技术栈，如 React、Vue 和 Svelte。
-它可以帮助开发人员更轻松地构建高性能、易于维护的 Web 应用程序和静态站点。Astro 
+它可以帮助开发人员更轻松地构建高性能、易于维护的 Web 应用程序和静态站点。Astro
 还提供了许多有用的功能和集成，如预渲染、动态数据、路由和布局系统，可以帮助开发人员
 更轻松地构建现代化的 Web 应用程序和静态站点。
 
@@ -48,11 +48,15 @@ Astro 是一种 Web 开发框架，它使用了现代前端技术栈，如 React
 MDX 是一种可以在 Markdown 文件中嵌入 JSX 代码的格式。它可以让我们在 Markdown
 文件中使用 React 组件，从而可以在 Markdown 文件中使用 JSX 代码。
 
+* [MDX 相关文档](https://docs.astro.build/en/guides/markdown-content/)
+
 **但本项目中暂不使用该技术，相关依赖是被移除的，默认生成的 Astro 默认是带着 MDX 的依赖**
 
 ## Prettier
 
 Prettier 是一个代码格式化工具，它可以帮助我们统一代码的风格，从而让代码更加易于阅读和维护。
+
+* [Prettier 官网](https://prettier.io/)
 
 ### 本项目中的配置
 
@@ -85,3 +89,39 @@ tabWidth: 2
 # 例如：const arr = [1, 2, 3]。否则在多行结尾添加逗号，例如：const arr = [1, 2, 3,]。
 trailingComma: 'none'
 ```
+
+## ESLint
+
+ESLint 是一个代码检查工具，它可以帮助我们检查代码中的错误和不规范的地方，从而让代码更加易于阅读和维护。
+
+[.eslintrc.yml](.eslintrc.yml)
+
+```yml
+# 这个配置文件的作用是让 ESLint 可以对 TypeScript 代码和 Astro 组件文件进行语法检查，
+# 并使用 Astro 推荐的代码规范来对代码进行格式化。通过配置 ESLint，可以帮助开发人员
+# 在开发过程中更加规范地编写代码，提高代码的质量和可维护性。
+root: true
+parser: '@typescript-eslint/parser' # 使用 @typescript-eslint/parser 解析器解析 TypeScript 代码。
+extends:
+  - plugin:astro/recommended # 扩展了名为 astro/recommended 的推荐规则集。
+overrides:
+  - files:
+      - "*.astro" # 对 Astro 组件文件（后缀名为 .astro）进行特殊处理。
+    parser: astro-eslint-parser # 使用 astro-eslint-parser 解析器解析 Astro 组件文件。
+    parserOptions:
+      # 使用 @typescript-eslint/parser 解析器解析 TypeScript 代码。
+      parser: "@typescript-eslint/parser"
+      extraFileExtensions:
+        # 允许使用 .astro 扩展名的文件，以便 ESLint 在 Astro 组件文件中使用 
+        # @typescript-eslint/parser 解析 TypeScript 代码。 
+        - ".astro" 
+```
+
+* [ESLint 官网](https://eslint.org/)
+
+### 关于 ESLint 的相关指令
+
+* `yarn lint`：检查代码中的错误和不规范的地方。
+* `yarn lint:fix`：检查代码中的错误和不规范的地方，并尝试自动修复。
+* `yarn lint:check`：检查代码中的错误和不规范的地方，并将检查结果输出到控制台。
+* `yarn lint:watch`：检查代码中的错误和不规范的地方，并在检查到代码有变化时重新检查。
