@@ -42,3 +42,9 @@ Astro 是一种 Web 开发框架，它使用了现代前端技术栈，如 React
 更轻松地构建现代化的 Web 应用程序和静态站点。
 
 * [Astro 官网](https://astro.build/)
+
+## MDX
+
+MDX 是一种可以在 Markdown 文件中嵌入 JSX 代码的格式。它可以让我们在 Markdown
+文件中使用 React 组件，从而可以在 Markdown 文件中使用 JSX 代码。
+**但本项目中暂不使用该技术，相关依赖是被移除的，默认生成的 Astro 默认是带着 MDX 的依赖**
