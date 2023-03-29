@@ -79,7 +79,8 @@ bracketSpacing: true
 # endOfLine: 'lf'：定义换行符的类型。如果该属性为 'lf'，则使用 LF 换行符。否则使用 CRLF 换行符。
 endOfLine: 'lf'
 
-# semi: false：定义是否在语句结尾使用分号。如果该属性为 false，则不使用分号，例如：console.log('hello world')。
+# semi: false：定义是否在语句结尾使用分号。如果该属性为 false，则不使用分号，
+# 例如：console.log('hello world')。
 # 否则使用分号，例如：console.log('hello world');。
 semi: false
 
@@ -125,3 +126,44 @@ overrides:
 * `yarn lint:fix`：检查代码中的错误和不规范的地方，并尝试自动修复。
 * `yarn lint:check`：检查代码中的错误和不规范的地方，并将检查结果输出到控制台。
 * `yarn lint:watch`：检查代码中的错误和不规范的地方，并在检查到代码有变化时重新检查。
+
+## TypeScript
+
+TypeScript 是一种由微软开发的自由和开源的编程语言。它是 JavaScript 的一个超集，
+并且本质上向这门语言添加了可选的静态类型和基于类的面向对象编程。
+
+* [TypeScript 官网](https://www.typescriptlang.org/)
+
+[tsconfig.json](tsconfig.json)
+
+```json5
+{
+  /*
+   * 继承了另一个 TypeScript 配置文件 astro/tsconfigs/strict，
+   * 这个配置文件中定义了一些常用的严格编译选项，如开启 strict 模式、
+   * 启用 ES6 模块等，可以帮助开发人员编写更加安全和规范的 TypeScript 代码
+   */
+  "extends": "astro/tsconfigs/strict",
+  /* 表示编译器的选项和特性 */
+  "compilerOptions": {
+    /* 使用哪种 JSX 编译器。在这里设置为 react，表示使用 React 的 JSX 编译器。*/
+    "jsx": "react",
+    /*
+     * 要包含在编译中的 TypeScript 类型声明文件。在这里，使用了 Astro 内置的 
+     * @astrojs/image/client 类型声明文件，表示要在编译中包含该文件，
+     * 以便在 Astro 项目中使用 @astrojs/image 插件时能够获得类型检查和提示。
+     */
+    "types": [
+      "@astrojs/image/client"
+    ]
+  }
+}
+```
+
+### TS 的常用指令
+
+* `yarn tsc`：编译 TypeScript 代码。
+* `yarn tsc:watch`：编译 TypeScript 代码，并在检查到代码有变化时重新编译。
+* `yarn tsc:check`：编译 TypeScript 代码，并将编译结果输出到控制台。
+* `yarn tsc:clean`：清除编译后的 JavaScript 代码。
+* `yarn tsc:build`：编译 TypeScript 代码，并清除编译后的 JavaScript 代码。
