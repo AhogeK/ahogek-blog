@@ -167,3 +167,84 @@ TypeScript 是一种由微软开发的自由和开源的编程语言。它是 Ja
 * `yarn tsc:check`：编译 TypeScript 代码，并将编译结果输出到控制台。
 * `yarn tsc:clean`：清除编译后的 JavaScript 代码。
 * `yarn tsc:build`：编译 TypeScript 代码，并清除编译后的 JavaScript 代码。
+
+## Tailwind CSS
+
+Tailwind CSS 是一个用于快速构建用户界面的工具类 CSS 框架。它提供了一系列预定义的类，
+这些类可以用来快速地为 HTML 元素添加样式，从而让开发人员可以专注于构建用户界面。
+
+* [Tailwind CSS 官网](https://tailwindcss.com/)
+
+[tailwind.config.cjs](tailwind.config.cjs)
+
+```js
+/**
+ * Tailwind CSS 的配置文件，定义了如何定制 Tailwind CSS 的样式
+ *
+ * content：指定哪些文件包含了需要构建样式的样式代码。在这个例子中，
+ * 它指定了 src 目录下的所有 .astro、.html、.js、.jsx、.md、.mdx、
+ * .svelte、.ts、.tsx、.vue 文件都包含需要构建的样式代码。
+ * darkMode：指定深色模式的样式变化方式。在这个例子中，它设置为 "class"，
+ * 表示使用一个 CSS 类来切换深色模式的样式。
+ * theme：定义样式主题相关的配置。在这个例子中，它包括了一个 extend 属性，
+ * 用来扩展已有的样式主题。其中，mplus 属性定义了一个自定义的字体族，
+ * 包括三个字体名称，分别为 'M PLUS Rounded 1c'、'Verdana'、'sans-serif'。
+ * 这样，我们就可以在样式中使用这个字体族了。
+ * plugins：用于定义 Tailwind CSS 插件相关的配置，例如自定义样式、
+ * 响应式变化等。
+ *
+ * @type {import('tailwindcss').Config}
+ **/
+module.exports = {
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      mplus: [
+        '\'M PLUS Rounded 1c\'',
+        'Verdana',
+        'sans-serif'
+      ]
+    }
+  },
+  plugins: []
+}
+```
+
+[src/styles/global.css](src/styles/global.css)
+
+```css
+/*
+  CSS 的 @import 规则，用于从指定的 URL 导入外部样式表
+  @import 规则指定了从 Google Fonts 网站导入一个外部字体样式表。URL 中的参数 
+  family=M+PLUS+Rounded+1c:wght@300;500;700&display=swap 
+  指定了要导入的字体名称、字重和显示方式等信息。
+  family 参数指定了要导入的字体名称为 "M PLUS Rounded 1c"。
+  wght 参数指定了要导入的字体的字重（Weight），这里包括三个值：300、500 和 700。
+  display 参数指定了要导入的字体的显示方式（Display），这里的值为 "swap"，
+  表示使用字体的过程中会发生切换，因此浏览器需要先下载指定的字体文件。
+
+  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
+  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ */
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;500;700&display=swap");
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  /* 
+    指定字体的平滑方式。在这个例子中，它设置为 "antialiased"，
+    表示使用抗锯齿技术来平滑字体边缘，使其更加清晰。 
+   */
+  -webkit-font-smoothing: antialiased;
+  /* 
+    指定文本渲染方式。在这个例子中，它设置为 "optimizeLegibility"，
+    表示优化文本渲染以提高可读性，例如自动调整字距和字形等。 
+   */
+  text-rendering: optimizeLegibility;
+  /* 
+    指定文本溢出时的换行方式。在这个例子中，它设置为 "break-word"，
+    表示在单词边界处换行，以防止文本溢出容器。 
+   */
+  overflow-wrap: break-word;
+}
+```
