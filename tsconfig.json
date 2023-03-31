@@ -6,16 +6,18 @@
    */
   "extends": "astro/tsconfigs/strict",
   // 表示编译器的选项和特性
-"compilerOptions": {
+  "compilerOptions": {
+    "outDir": "dist",
     // 使用哪种 JSX 编译器。在这里设置为 react，表示使用 React 的 JSX 编译器。
     "jsx": "react",
     /*
-     * 要包含在编译中的 TypeScript 类型声明文件。在这里，使用了 Astro 内置的 
+     * 要包含在编译中的 TypeScript 类型声明文件。在这里，使用了 Astro 内置的
      * @astrojs/image/client 类型声明文件，表示要在编译中包含该文件，
      * 以便在 Astro 项目中使用 @astrojs/image 插件时能够获得类型检查和提示。
      */
     "types": [
       "@astrojs/image/client"
-    ]
+    ],
+    "skipLibCheck": true
   }
 }

@@ -1,9 +1,16 @@
 ---
-const today = new Date();
+import { HOMEPAGE_URL } from "../config";
+
+const today = new Date()
 ---
 
-<footer>
-	&copy; {today.getFullYear()} YOUR NAME HERE. All rights reserved.
+<!-- 
+	text-zinc-500: #9CA3AF
+	p-4: 内边距 1rem
+	text-center: 文字居中
+-->
+<footer class="text-zinc-500 p-4 text-center">
+	&copy; {today.getFullYear()} <a href={HOMEPAGE_URL}>AhogeK</a>. 保留所有权利.
 </footer>
 <style>
 	footer {
