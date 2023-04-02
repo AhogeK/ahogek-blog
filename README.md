@@ -1,18 +1,18 @@
 # AhogeK Blog
+
 > 这是我通过学习 [@devlife](https://www.youtube.com/@devaslife) 的
 > [How to create a 'What I Use' blog with Astro and Tailwind CSS (at a hotel lounge)](https://www.youtube.com/watch?v=3_JE76PKBWE&t=2013s)
 > 编写的以 [Astro](doc/ASTRO.md) 为主要框架的个人博客
 
 ## 技术点
 
-| 名称          | 描述                         |
-|:------------|:---------------------------|
-| Astro       | 静态网站框架                     |
-| Tailwind    | CSS 框架                     |
-| React       | JS 的以组件概念为基础的 UI 框架        |
+| 名称        | 描述                                    |
+| :---------- | :-------------------------------------- |
+| Astro       | 静态网站框架                            |
+| Tailwind    | CSS 框架                                |
+| React       | JS 的以组件概念为基础的 UI 框架         |
 | Headless UI | React 的 UI 组件库 (无样式设置交互组件) |
-| React Icons | React 的图标库                 |
-
+| React Icons | React 的图标库                          |
 
 ## 项目结构
 
@@ -41,14 +41,14 @@ Astro 是一种 Web 开发框架，它使用了现代前端技术栈，如 React
 还提供了许多有用的功能和集成，如预渲染、动态数据、路由和布局系统，可以帮助开发人员
 更轻松地构建现代化的 Web 应用程序和静态站点。
 
-* [Astro 官网](https://astro.build/)
+- [Astro 官网](https://astro.build/)
 
 ## MDX
 
 MDX 是一种可以在 Markdown 文件中嵌入 JSX 代码的格式。它可以让我们在 Markdown
 文件中使用 React 组件，从而可以在 Markdown 文件中使用 JSX 代码。
 
-* [MDX 相关文档](https://docs.astro.build/en/guides/markdown-content/)
+- [MDX 相关文档](https://docs.astro.build/en/guides/markdown-content/)
 
 **但本项目中暂不使用该技术，相关依赖是被移除的，默认生成的 Astro 默认是带着 MDX 的依赖**
 
@@ -56,7 +56,7 @@ MDX 是一种可以在 Markdown 文件中嵌入 JSX 代码的格式。它可以�
 
 Prettier 是一个代码格式化工具，它可以帮助我们统一代码的风格，从而让代码更加易于阅读和维护。
 
-* [Prettier 官网](https://prettier.io/)
+- [Prettier 官网](https://prettier.io/)
 
 ### 本项目中的配置
 
@@ -107,32 +107,32 @@ extends:
   - plugin:astro/recommended # 扩展了名为 astro/recommended 的推荐规则集。
 overrides:
   - files:
-      - "*.astro" # 对 Astro 组件文件（后缀名为 .astro）进行特殊处理。
+      - '*.astro' # 对 Astro 组件文件（后缀名为 .astro）进行特殊处理。
     parser: astro-eslint-parser # 使用 astro-eslint-parser 解析器解析 Astro 组件文件。
     parserOptions:
       # 使用 @typescript-eslint/parser 解析器解析 TypeScript 代码。
-      parser: "@typescript-eslint/parser"
+      parser: '@typescript-eslint/parser'
       extraFileExtensions:
-        # 允许使用 .astro 扩展名的文件，以便 ESLint 在 Astro 组件文件中使用 
-        # @typescript-eslint/parser 解析 TypeScript 代码。 
-        - ".astro" 
+        # 允许使用 .astro 扩展名的文件，以便 ESLint 在 Astro 组件文件中使用
+        # @typescript-eslint/parser 解析 TypeScript 代码。
+        - '.astro'
 ```
 
-* [ESLint 官网](https://eslint.org/)
+- [ESLint 官网](https://eslint.org/)
 
 ### 关于 ESLint 的相关指令
 
-* `yarn lint`：检查代码中的错误和不规范的地方。
-* `yarn lint:fix`：检查代码中的错误和不规范的地方，并尝试自动修复。
-* `yarn lint:check`：检查代码中的错误和不规范的地方，并将检查结果输出到控制台。
-* `yarn lint:watch`：检查代码中的错误和不规范的地方，并在检查到代码有变化时重新检查。
+- `yarn lint`：检查代码中的错误和不规范的地方。
+- `yarn lint:fix`：检查代码中的错误和不规范的地方，并尝试自动修复。
+- `yarn lint:check`：检查代码中的错误和不规范的地方，并将检查结果输出到控制台。
+- `yarn lint:watch`：检查代码中的错误和不规范的地方，并在检查到代码有变化时重新检查。
 
 ## TypeScript
 
 TypeScript 是一种由微软开发的自由和开源的编程语言。它是 JavaScript 的一个超集，
 并且本质上向这门语言添加了可选的静态类型和基于类的面向对象编程。
 
-* [TypeScript 官网](https://www.typescriptlang.org/)
+- [TypeScript 官网](https://www.typescriptlang.org/)
 
 [tsconfig.json](tsconfig.json)
 
@@ -143,37 +143,35 @@ TypeScript 是一种由微软开发的自由和开源的编程语言。它是 Ja
    * 这个配置文件中定义了一些常用的严格编译选项，如开启 strict 模式、
    * 启用 ES6 模块等，可以帮助开发人员编写更加安全和规范的 TypeScript 代码
    */
-  "extends": "astro/tsconfigs/strict",
+  extends: 'astro/tsconfigs/strict',
   /* 表示编译器的选项和特性 */
-  "compilerOptions": {
+  compilerOptions: {
     /* 使用哪种 JSX 编译器。在这里设置为 react，表示使用 React 的 JSX 编译器。*/
-    "jsx": "react",
+    jsx: 'react',
     /*
-     * 要包含在编译中的 TypeScript 类型声明文件。在这里，使用了 Astro 内置的 
+     * 要包含在编译中的 TypeScript 类型声明文件。在这里，使用了 Astro 内置的
      * @astrojs/image/client 类型声明文件，表示要在编译中包含该文件，
      * 以便在 Astro 项目中使用 @astrojs/image 插件时能够获得类型检查和提示。
      */
-    "types": [
-      "@astrojs/image/client"
-    ]
+    types: ['@astrojs/image/client']
   }
 }
 ```
 
 ### TS 的常用指令
 
-* `yarn tsc`：编译 TypeScript 代码。
-* `yarn tsc:watch`：编译 TypeScript 代码，并在检查到代码有变化时重新编译。
-* `yarn tsc:check`：编译 TypeScript 代码，并将编译结果输出到控制台。
-* `yarn tsc:clean`：清除编译后的 JavaScript 代码。
-* `yarn tsc:build`：编译 TypeScript 代码，并清除编译后的 JavaScript 代码。
+- `yarn tsc`：编译 TypeScript 代码。
+- `yarn tsc:watch`：编译 TypeScript 代码，并在检查到代码有变化时重新编译。
+- `yarn tsc:check`：编译 TypeScript 代码，并将编译结果输出到控制台。
+- `yarn tsc:clean`：清除编译后的 JavaScript 代码。
+- `yarn tsc:build`：编译 TypeScript 代码，并清除编译后的 JavaScript 代码。
 
 ## Tailwind CSS
 
 Tailwind CSS 是一个用于快速构建用户界面的工具类 CSS 框架。它提供了一系列预定义的类，
 这些类可以用来快速地为 HTML 元素添加样式，从而让开发人员可以专注于构建用户界面。
 
-* [Tailwind CSS 官网](https://tailwindcss.com/)
+- [Tailwind CSS 官网](https://tailwindcss.com/)
 
 [tailwind.config.cjs](tailwind.config.cjs)
 
@@ -200,11 +198,7 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      mplus: [
-        '\'M PLUS Rounded 1c\'',
-        'Verdana',
-        'sans-serif'
-      ]
+      mplus: ["'M PLUS Rounded 1c'", 'Verdana', 'sans-serif']
     }
   },
   plugins: []
@@ -227,10 +221,11 @@ module.exports = {
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;500;700&display=swap');
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   /* 
     指定字体的平滑方式。在这个例子中，它设置为 "antialiased"，
     表示使用抗锯齿技术来平滑字体边缘，使其更加清晰。 
