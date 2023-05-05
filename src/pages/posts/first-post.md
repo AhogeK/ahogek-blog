@@ -1,9 +1,9 @@
 ---
-layout: "../layouts/BlogPost.astro"
-title: "About Me"
+layout: "../../layouts/BlogPost.astro"
+title: "First post"
 description: "Lorem ipsum dolor sit amet"
-updatedDate: "August 08 2022"
-heroImage: "/placeholder-about.jpg"
+pubDate: "Jul 08 2022"
+heroImage: "https://images.unsplash.com/photo-1632910138458-5bf601f3835e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1931&q=80"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
