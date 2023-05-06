@@ -12,6 +12,32 @@ import { BsFillChatRightHeartFill } from 'react-icons/bs/index.js'
 import ThemeToggle from './ThemeToggleButton'
 ---
 
+<style>
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateX(-1px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translateX(1px);
+    }
+  }
+
+  .title-h2:hover .icon-shake {
+    animation: shake 0.5s linear;
+  }
+</style>
+
 <!-- 
   fixed: 将元素定位为固定位置，即不会随着页面滚动而改变位置。
   w-full: 将元素宽度设置为100%。
@@ -41,9 +67,9 @@ import ThemeToggle from './ThemeToggleButton'
         text-lg: 将元素的字体大小设置为大号。
        -->
         <h2
-          class="font-semibold tracking-tighter p-2 font-mplus text-lg flex items-center"
+          class="font-semibold tracking-tighter p-2 font-mplus text-lg flex items-center title-h2"
         >
-          <BsFillChatRightHeartFill />
+          <BsFillChatRightHeartFill className="icon-shake" />
           <span class="mr-1"></span>
           {SITE_TITLE}
         </h2>
