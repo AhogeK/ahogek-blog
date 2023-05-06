@@ -9,7 +9,6 @@ import { HOMEPAGE_URL } from '../config'
 import Masthead from '@components/Masthead.astro'
 import { IoArrowForward } from 'react-icons/io5/index.js'
 import { Image } from '@astrojs/image/components'
-import Layout from '../layouts/Layout.astro'
 
 const posts = (await Astro.glob('./posts/*.md')).sort(
   (a: any, b: any) =>
@@ -22,7 +21,6 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <Layout />
   </head>
   <Body>
     <Header title={SITE_TITLE} />
