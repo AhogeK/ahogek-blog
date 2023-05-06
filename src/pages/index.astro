@@ -25,7 +25,7 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
     <Layout />
   </head>
   <Body>
-    <Header title={SITE_TITLE} client:load />
+    <Header title={SITE_TITLE} />
     <!--
       pt-[56px] 表示 padding-top: 56px;
     -->
