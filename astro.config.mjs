@@ -15,7 +15,6 @@ export default defineConfig({
   site: 'https://blob.ahogek.com',
   // 整合插件
   integrations: [
-
     // 生成站点地图
     sitemap(),
 
