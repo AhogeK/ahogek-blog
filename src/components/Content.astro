@@ -6,12 +6,12 @@ export interface Props {
 const { className = '' } = Astro.props
 ---
 
-<article class={`px-8 mx-auto max-w-3xl ${className} blog-content`}>
+<article class={`px-8 mx-auto max-w-3xl blog-content-wrapper ${className}`}>
   <slot />
 </article>
 
 <style lang="scss" is:global>
-  .blog-content {
+  .blog-content-wrapper {
     h1 {
       @apply text-4xl font-bold font-mplus;
     }
