@@ -20,8 +20,11 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        'mplus': ['M PLUS Rounded 1c', 'Verdana', 'sans-serif']
+      },
       mplus: [
-        '\'M PLUS Rounded 1c\'',
+        'M PLUS Rounded 1c',
         'Verdana',
         'sans-serif'
       ]
