@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro'
 import Body from '@components/Body.astro'
 import Content from '@components/Content.astro'
 import { SITE_TITLE } from 'src/config'
+import { IoTimeOutline } from 'react-icons/io5/index'
 
 export interface Props {
   content: {
@@ -12,12 +13,26 @@ export interface Props {
     description: string
     heroImage?: string
     tags: string[]
+    createdAt: any
+    updatedAt: any
   }
 }
 
 const {
-  content: { title, description, heroImage }
+  content: { title, description, heroImage, createdAt }
 } = Astro.props
+
+// 将原始日期转换为 Date 对象
+const createdAtDate = new Date(createdAt)
+
+const formattedCreatedAt = createdAtDate.toLocaleString('zh-CN', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+});
 ---
 
 <!DOCTYPE html>
@@ -52,6 +67,9 @@ const {
         </h1>
         <div>
           {description}
+        </div>
+        <div class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+          <IoTimeOutline className={"inline"}/> 于 {formattedCreatedAt} 发布
         </div>
         <hr class="border-top border-zinc-400 my-4" />
         <div class="post-content">
@@ -105,7 +123,7 @@ const {
       }
       p {
         code {
-          @apply bg-gray-200 text-black p-0.5 rounded-md text-sm dark:bg-gray-800 dark:text-white;
+          @apply bg-gray-200 text-black p-0.5 text-red-500 rounded-md text-sm dark:bg-gray-800 dark:text-white;
         }
       }
     }
