@@ -50,6 +50,9 @@ const {
         <h1 class="text-3xl my-1 font-mplus">
           {title}
         </h1>
+        <div>
+          {description}
+        </div>
         <hr class="border-top border-zinc-400 my-4" />
         <div class="post-content">
           <slot />
@@ -93,6 +96,50 @@ const {
       ul {
         @apply list-disc;
       }
+      pre {
+        @apply p-4 rounded-xl relative;
+        copy-code-button {
+          @apply absolute right-1;
+          top: -1rem;
+        }
+      }
+      p {
+        code {
+          @apply bg-gray-200 text-black p-1 rounded-md text-sm dark:bg-gray-800 dark:text-white;
+        }
+      }
     }
   </style>
+  <script>
+    import '@components/CopyCodeButton'
+
+    let blocks = document.querySelectorAll('pre')
+    blocks.forEach(block => {
+      let button = document.createElement('copy-code-button')
+      let isMouseOver = false // 标记鼠标是否在 pre 元素上
+
+      // 鼠标进入 pre 元素时，显示 copy-code-button 元素
+      block.addEventListener('mouseenter', () => {
+        isMouseOver = true
+        button.style.display = 'block'
+      })
+
+      // 鼠标离开 pre 元素时，隐藏 copy-code-button 元素
+      block.addEventListener('mouseleave', () => {
+        isMouseOver = false
+        button.style.display = 'none'
+      })
+
+      // 检查页面是否已加载完成，如果是，则根据鼠标状态来显示或隐藏 copy-code-button 元素
+      document.addEventListener('DOMContentLoaded', () => {
+        if (isMouseOver) {
+          button.style.display = 'block'
+        } else {
+          button.style.display = 'none'
+        }
+      })
+
+      block.appendChild(button)
+    })
+  </script>
 </html>
