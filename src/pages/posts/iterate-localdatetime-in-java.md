@@ -7,7 +7,7 @@ tags:
 heroImage: https://trendblog.net/wp-content/uploads/2022/02/21-218111_multithreading-and-parallel-computing-in-java-java-background.jpg
 ---
 
-![img](../../../public/20210331163010597.png)
+![img](/20210331163010597.png)
 
 当中的 ``ChronoUnit.DAYS.between(startDate, endDate)`` 就可以取到 startDate endDate 之间相隔的天数
 

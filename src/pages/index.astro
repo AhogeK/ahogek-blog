@@ -24,17 +24,10 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
   </head>
   <Body>
     <Header title={SITE_TITLE} />
-    <!--
-      pt-[56px] 表示 padding-top: 56px;
-    -->
     <main class="pt-[56px]">
       <Masthead />
       <Content>
         <section>
-          <!--
-            mb-8 表示 margin-bottom: 2rem;
-            indent-4 表示 text-indent: 1rem;
-           -->
           <p class="mb-8 indent-8">
             我是一个Java开发工程师，目前在一家互联网公司从事后端开发的工作。
             我现在主要的开发工具为 MacBook Air M1，主要使用 Jetbrains 的 IDE
@@ -42,13 +35,6 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
             目前计划并希望自己能在开源上有所贡献，正在努力阅读社区优秀的开源项目，
             想能有所成长与突破，希望自己可以坚持下去。
           </p>
-          <!--
-            inline-flex: 行内元素，但是可以设置宽高
-            items-center: 交叉轴居中
-            gap-1: 间距为1rem
-            indent-1: 缩进1rem
-            inline: 行内元素
-           -->
           <a
             class="mb-8 inline-flex items-center gap-1 indent-1 text-orange-500"
             href={HOMEPAGE_URL}
