@@ -4,7 +4,7 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
 import Body from '../components/Body.astro'
-import MainContent from '../components/MainContent.astro'
+import Content from '../components/Content.astro'
 import { HOMEPAGE_URL } from '../config'
 import Masthead from '@components/Masthead.astro'
 import { IoArrowForward } from 'react-icons/io5/index.js'
@@ -29,7 +29,7 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
     -->
     <main class="pt-[56px]">
       <Masthead />
-      <MainContent>
+      <Content>
         <section>
           <!--
             mb-8 表示 margin-bottom: 2rem;
@@ -88,7 +88,7 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
             }
           </ul>
         </section>
-      </MainContent>
+      </Content>
     </main>
     <Footer />
   </Body>
