@@ -1,11 +1,5 @@
 {
-  /*
-   * 继承了另一个 TypeScript 配置文件 astro/tsconfigs/strict，
-   * 这个配置文件中定义了一些常用的严格编译选项，如开启 strict 模式、
-   * 启用 ES6 模块等，可以帮助开发人员编写更加安全和规范的 TypeScript 代码
-   */
   "extends": "astro/tsconfigs/base",
-  // 表示编译器的选项和特性
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
@@ -15,11 +9,11 @@
     "outDir": "dist",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@types/*": ["src/types/*"] // 为自定义类型定义添加路径
+      "@layouts/*": [
+        "src/layouts/*"
+      ]
     },
     "verbatimModuleSyntax": true,
-    // 使用哪种 JSX 编译器。在这里设置为 react，表示使用 React 的 JSX 编译器。
     "jsx": "react",
     "plugins": [
       {
@@ -27,6 +21,11 @@
       }
     ]
   },
-  "exclude": ["node_modules", "dist"],
-  "typeRoots": ["./node_modules/@types", "./typings"],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "typeRoots": [
+    "./node_modules/@types"
+  ]
 }
