@@ -103,7 +103,7 @@ const formattedCreatedAt = createdAtDate.toLocaleString('zh-CN', {
         @apply font-bold font-mplus;
       }
       img {
-        @apply border border-slate-300 dark:border-zinc-700 rounded-xl mb-6;
+        @apply border border-slate-300 dark:border-zinc-700 rounded-xl mt-6 mb-6;
       }
       p {
         @apply mb-6;
@@ -115,7 +115,7 @@ const formattedCreatedAt = createdAtDate.toLocaleString('zh-CN', {
         @apply list-disc;
       }
       pre {
-        @apply p-4 rounded-xl relative;
+        @apply p-4 rounded-xl relative mt-6 mb-6;
         copy-code-button {
           @apply absolute right-1;
           top: -1rem;
@@ -123,8 +123,11 @@ const formattedCreatedAt = createdAtDate.toLocaleString('zh-CN', {
       }
       p {
         code {
-          @apply bg-gray-200 p-0.5 text-red-500 rounded-md text-sm dark:bg-gray-800 dark:text-white;
+          @apply bg-gray-200 p-0.5 text-red-500 rounded-md text-sm dark:bg-gray-700 dark:text-white;
         }
+      }
+      blockquote {
+        @apply border-l-4 dark:border-orange-500 pl-4 my-4;
       }
     }
   </style>
