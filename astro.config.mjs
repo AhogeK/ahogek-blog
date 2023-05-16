@@ -22,7 +22,9 @@ export default defineConfig({
     react(),
 
     // 支持图片
-    image(),
+    image({
+      serviceEntryPoint: '@astrojs/image/sharp'
+    }),
 
     // 支持 Tailwind CSS
     tailwind()

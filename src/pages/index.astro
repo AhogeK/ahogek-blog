@@ -13,15 +13,15 @@ import fs from 'fs'
 
 // 获取文件创建和修改时间的函数
 function getFileTimes(filePath: string) {
-    const stats = fs.statSync(filePath);
-    return {
-        created: stats.birthtime,
-        modified: stats.mtime,
-    };
+  const stats = fs.statSync(filePath)
+  return {
+    created: stats.birthtime,
+    modified: stats.mtime
+  }
 }
 
 // 设置文章的创建时间和修改时间
-(await Astro.glob('./posts/*.md')).forEach((post: any) => {
+;(await Astro.glob('./posts/*.md')).forEach((post: any) => {
   console.log(post.file)
   const times = getFileTimes(post.file)
   post.frontmatter.createdAt = times.created
@@ -73,7 +73,7 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
                         class="border border-slate-300 dark:border-zinc-700 rounded-xl"
                         src={post.frontmatter.heroImage}
                         width={720 * 2}
-                        aspectRatio={2.0}
+                        aspectRatio={16 / 9}
                         alt="Thumbnail"
                         format={post.frontmatter.iamgeFormat ?? 'avif'}
                       />
@@ -96,6 +96,4 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
     </main>
     <Footer />
   </Body>
-
-
 </html>
