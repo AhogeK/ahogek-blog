@@ -70,8 +70,8 @@ allPosts.map(post => {
         </HeaderLink>
       </div>
       <div class="flex-1"></div>
-      <ThemeToggle client:visible />
-      <DropdownMenu client:visible tags={Array.from(allTags)} />
+      <ThemeToggle client:load />
+      <DropdownMenu client:load tags={Array.from(allTags)} />
     </nav>
   </div>
 </header>
