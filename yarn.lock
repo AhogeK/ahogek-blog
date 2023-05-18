@@ -519,6 +519,18 @@
   resolved "https://registry.yarnpkg.com/@github/clipboard-copy-element/-/clipboard-copy-element-1.1.2.tgz#7a6e8042749471504d4e7cfcc47097a781db2bdb"
   integrity sha512-L6CMrcA5we0udafvoSuRCE/Ci/3xrLWKYRGup2IlhxF771bQYsQ2EB1of182pI8ZWM4oxgwzu37+igMeoZjN/A==
 
+"@headlessui/react@^1.7.14":
+  version "1.7.14"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.7.14.tgz#75f19552c535113640fe8a3a40e71474f49e89c9"
+  integrity sha512-znzdq9PG8rkwcu9oQ2FwIy0ZFtP9Z7ycS+BAqJ3R5EIqC/0bJGvhT7193rFf+45i9nnPsYvCQVW4V/bB9Xc+gA==
+  dependencies:
+    client-only "^0.0.1"
+
+"@headlessui/tailwindcss@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@headlessui/tailwindcss/-/tailwindcss-0.1.3.tgz#a9b8b4c2677a7ef37889708d4401c7871b2e6105"
+  integrity sha512-3aMdDyYZx9A15euRehpppSyQnb2gIw2s/Uccn2ELIoLQ9oDy0+9oRygNWNjXCD5Dt+w1pxo7C+XoiYvGcqA4Kg==
+
 "@humanwhocodes/config-array@^0.11.8":
   version "0.11.8"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.8.tgz#03595ac2075a4dc0f191cc2131de14fbd7d410b9"
@@ -1246,6 +1258,11 @@ cli-spinners@^2.6.1:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-2.9.0.tgz#5881d0ad96381e117bbe07ad91f2008fe6ffd8db"
   integrity sha512-4/aL9X3Wh0yiMQlE+eeRhWP6vclO3QRtw1JHKIT0FFUs5FjpFmESqtMvYZ0+lbzBw900b95mS0hohy+qn2VK/g==
+
+client-only@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
+  integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
 
 clone@^1.0.2:
   version "1.0.4"
