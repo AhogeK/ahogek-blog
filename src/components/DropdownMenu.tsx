@@ -62,7 +62,7 @@ export default function DropdownMenu({ tags }: Props) {
           <div>
             <Menu.Button
               onMouseDown={event => event.preventDefault()}
-              className="inline-flex justify-center rounded-md border border-zinc-400 dark:border-zinc-700 px-2 py-2 text-sm font-medium shadow-sm hover:bg-orange-200 dark:hover:bg-zinc-800 ui-open:outline-none focus:outline-none hover:outline-none ui-open:ring-2 ui-open:ring-indigo-500 ui-open:ring-offset-2 ui-open:ring-offset-gray-100 transition-all"
+              className="inline-flex justify-center rounded-md border border-zinc-400 dark:border-zinc-700 px-2 py-2 text-sm font-medium shadow-sm ui-open:bg-orange-200 dark:ui-open:bg-zinc-800 ui-open:outline-none focus:outline-none hover:outline-none ui-open:ring-2 ui-open:ring-indigo-500 ui-open:ring-offset-2 ui-open:ring-offset-gray-100 transition-all"
               aria-label="menu"
             >
               <DropdownMenuIcon />
