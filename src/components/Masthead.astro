@@ -2,6 +2,7 @@
   <div class="absolute w-full h-full overflow-hidden">
     <div class="uppercase text-sm mb-4">
       <video
+        id="video"
         class="absolute h-auto left-1/2 top-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-30"
         autoplay
         loop
@@ -9,14 +10,36 @@
         playsinline
         preload="auto"
       >
-        <source src="one-more-time/one-more-time.m3u8" type="video/mp4" />
+        <source
+          src="one-more-time/one-more-time.m3u8"
+          type="application/x-mpegURL"
+        />
       </video>
     </div>
   </div>
   <div class="z-10 text-center px-8 drop-shadow-lg shadow-black">
     <div class="uppercase text-sm mb-4">Welcom to</div>
     <div class="text-4xl font-mplus font-medium">
-      AhogeK 的 <span class="text-orange-500">个人博客</span>
+      AhogeK 的 <span class="text-orange-500"> 个人博客</span>
     </div>
   </div>
 </section>
+
+<script>
+  import Hls from 'hls.js'
+
+  const video = document.getElementById('video')
+  if (Hls.isSupported()) {
+    var hls = new Hls()
+    hls.loadSource('one-more-time/one-more-time.m3u8')
+    hls.attachMedia(video)
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+      video.play()
+    })
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = 'one-more-time/one-more-time.m3u8'
+    video.addEventListener('canplay', function () {
+      video.play()
+    })
+  }
+</script>
