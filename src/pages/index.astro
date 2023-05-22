@@ -21,8 +21,7 @@ function getFileTimes(filePath: string) {
 }
 
 // 设置文章的创建时间和修改时间
-;(await Astro.glob('./posts/*.md')).forEach((post: any) => {
-  console.log(post.file)
+(await Astro.glob('./posts/*.md')).forEach((post: any) => {
   const times = getFileTimes(post.file)
   post.frontmatter.createdAt = times.created
   post.frontmatter.updatedAt = times.modified
