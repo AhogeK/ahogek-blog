@@ -1,6 +1,6 @@
 # AhogeK Blog
 
-> 这是我通过学习 [@devlife](https://www.youtube.com/@devaslife) 的
+> 这是我通过学习 [@devaslife](https://www.youtube.com/@devaslife) 的
 > [How to create a 'What I Use' blog with Astro and Tailwind CSS (at a hotel lounge)](https://www.youtube.com/watch?v=3_JE76PKBWE&t=2013s)
 > 编写的以 [Astro](doc/ASTRO.md) 为主要框架的个人博客
 
