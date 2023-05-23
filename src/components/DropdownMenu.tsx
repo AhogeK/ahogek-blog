@@ -11,7 +11,6 @@ export default function DropdownMenu({ tags }: Props) {
   const [isFocused, setIsFocused] = useState(false)
 
   const handleButtonFocus = () => {
-    console.log(1)
     const animOpenTop = document.getElementById(
       'globalnav-anim-menutrigger-bread-top-open'
     )
@@ -33,7 +32,6 @@ export default function DropdownMenu({ tags }: Props) {
   }
 
   const handleButtonBlur = (close: any) => {
-    console.log(2)
     const animCloseTop = document.getElementById(
       'globalnav-anim-menutrigger-bread-top-close'
     )
@@ -49,9 +47,11 @@ export default function DropdownMenu({ tags }: Props) {
       if (animCloseBottom instanceof SVGAnimateElement) {
         animCloseBottom.beginElement()
       }
-      close()
       // Set the menu state to not focused
       setIsFocused(false)
+      setTimeout(() => {
+        close()
+      }, 100)
     }
   }
 
@@ -62,7 +62,9 @@ export default function DropdownMenu({ tags }: Props) {
           <div>
             <Menu.Button
               onMouseDown={event => event.preventDefault()}
-              className="inline-flex justify-center rounded-md border border-zinc-400 dark:border-zinc-700 px-2 py-2 text-sm font-medium shadow-sm ui-open:bg-orange-200 dark:ui-open:bg-zinc-800 ui-open:outline-none focus:outline-none hover:outline-none ui-open:ring-2 ui-open:ring-indigo-500 ui-open:ring-offset-2 ui-open:ring-offset-gray-100 transition-all"
+              className="inline-flex justify-center rounded-md border border-zinc-400 dark:border-zinc-700 px-2 py-2 text-sm font-medium 
+              shadow-sm ui-open:bg-orange-200 dark:ui-open:bg-zinc-800 ui-open:outline-none focus:outline-none ui-open:ring-2 
+              ui-open:ring-indigo-500 ui-open:ring-offset-2 ui-open:ring-offset-gray-100 transition-all"
               aria-label="menu"
             >
               <DropdownMenuIcon />

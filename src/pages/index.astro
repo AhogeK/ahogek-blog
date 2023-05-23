@@ -64,7 +64,6 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
           <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {
               posts.map(post => {
-                console.log(post.url)
                 return (
                   <li class="text-center mb-4">
                     <a href={post.url}>
