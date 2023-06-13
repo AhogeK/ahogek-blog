@@ -6,10 +6,10 @@
 
 ## 技术点
 
-| 名称        | 描述                                    |
+| 名称        | 描述                                     |
 | :---------- | :-------------------------------------- |
-| Astro       | 静态网站框架                            |
+| Astro       | 静态网站框架                              |
 | Tailwind    | CSS 框架                                |
-| React       | JS 的以组件概念为基础的 UI 框架         |
-| Headless UI | React 的 UI 组件库 (无样式设置交互组件) |
-| React Icons | React 的图标库                          |
+| React       | JS 的以组件概念为基础的 UI 框架             |
+| Headless UI | React 的 UI 组件库 (无样式设置交互组件)     |
+| React Icons | React 的图标库                           |
