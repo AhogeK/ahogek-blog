@@ -4,7 +4,7 @@ description: 在 Ubuntu 系统使用 802.11ac USB WIFI 接收器接收并使用 
 layout: ../../layouts/BlogPost.astro
 tags:
   - Linux
-heroImage: https://ahogek.com/uploads/img/20230516/wallhaven-zyxvqy.jpg
+heroImage: https://ahogek.com/uploads/img/20231029/wallhaven-jxl31y.png
 ---
 
 ```shell
@@ -20,4 +20,4 @@ reboot
 
 重启结束后就可以看到 usb wifi
 
-![img](https://ahogek.com/uploads/img/20230516/20210421132506194.png)
+![img](https://ahogek.com/uploads/img/20231029/20210421132506194.png)

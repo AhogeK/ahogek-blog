@@ -18,7 +18,7 @@ const Video: React.FC = () => {
       if (Hls.isSupported()) {
         let hls = new Hls()
         hls.loadSource(
-          'https://ahogek.com/uploads/rtmp/one-more-time/one-more-time.m3u8'
+          'https://ahogek.com/uploads/video/20231029/one-more-time-one-more-chance/one-more-time-one-more-chance.m3u8'
         )
         hls.attachMedia(video.current)
         hls.on(Hls.Events.MANIFEST_PARSED, function() {
@@ -26,7 +26,7 @@ const Video: React.FC = () => {
         })
       } else if (video.current.canPlayType('application/vnd.apple.mpegurl')) {
         video.current.src =
-          'https://ahogek.com/uploads/rtmp/one-more-time/one-more-time.m3u8'
+          'https://ahogek.com/uploads/video/20231029/one-more-time-one-more-chance/one-more-time-one-more-chance.m3u8'
         video.current.addEventListener('canplay', function() {
           video.current?.play()
         })

@@ -4,7 +4,7 @@ description: 利用 Docker inspect 指令查看 Docker 容器中的 IP
 layout: ../../layouts/BlogPost.astro
 tags:
   - Docker
-heroImage: https://ahogek.com/uploads/img/20230516/wallhaven-yxe3jk.jpg
+heroImage: https://w.wallhaven.cc/full/p9/wallhaven-p9gr59.jpg
 ---
 
 > 在 Docker 指令中有一个 `inspect` 可以查看容器的详细信息，只需要

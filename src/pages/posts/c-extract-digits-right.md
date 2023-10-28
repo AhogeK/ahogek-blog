@@ -5,7 +5,7 @@ layout: ../../layouts/BlogPost.astro
 tags:
   - C
   - Algorithm
-heroImage: https://ahogek.com/uploads/img/20230516/wallhaven-vqo2yl.png
+heroImage: https://w.wallhaven.cc/full/o5/wallhaven-o575r9.jpg
 ---
 
 # 取一个数从右边第 p 位开始向右数 n 位的字段理解
