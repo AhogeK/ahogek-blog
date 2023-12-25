@@ -5,6 +5,8 @@ layout: ../../layouts/BlogPost.astro
 tags:
   - Linux
 heroImage: https://ahogek.com/uploads/img/20231029/wallhaven-jxl31y.png
+imageWidth: 2340
+imageHeight: 1080
 ---
 
 ```shell

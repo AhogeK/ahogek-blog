@@ -8,7 +8,9 @@
     "baseUrl": ".",
     "outDir": "dist",
     "paths": {
-      "@components/*": ["src/components/*"],
+      "@components/*": [
+        "src/components/*"
+      ],
       "@layouts/*": [
         "src/layouts/*"
       ]
@@ -19,6 +21,9 @@
       {
         "name": "@astrojs/ts-plugin"
       }
+    ],
+    "types": [
+      "astro/client"
     ]
   },
   "exclude": [

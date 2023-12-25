@@ -8,7 +8,7 @@ import Content from '../components/Content.astro'
 import { HOMEPAGE_URL } from '../config'
 import Masthead from '@components/Masthead.astro'
 import { IoArrowForward } from 'react-icons/io5/index.js'
-import { Image } from '@astrojs/image/components'
+import { Image } from 'astro:assets'
 import fs from 'fs'
 
 // 获取文件创建和修改时间的函数
@@ -21,7 +21,7 @@ function getFileTimes(filePath: string) {
 }
 
 // 设置文章的创建时间和修改时间
-(await Astro.glob('./posts/*.md')).forEach((post: any) => {
+;(await Astro.glob('./posts/*.md')).forEach((post: any) => {
   const times = getFileTimes(post.file)
   post.frontmatter.createdAt = times.created
   post.frontmatter.updatedAt = times.modified
@@ -34,7 +34,7 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
 )
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
@@ -68,12 +68,14 @@ const posts = (await Astro.glob('./posts/*.md')).sort(
                   <li class="text-center mb-4">
                     <a href={post.url}>
                       <Image
-                        class="border border-slate-300 dark:border-zinc-700 rounded-xl"
+                        class="border border-slate-300 dark:border-zinc-700 rounded-xl aspect-[16/9] object-cover"
                         src={post.frontmatter.heroImage}
-                        width={720 * 2}
-                        aspectRatio={16 / 9}
+                        width={1920}
+                        height={1080}
                         alt="Thumbnail"
                         format={post.frontmatter.iamgeFormat ?? 'avif'}
+                        decoding="async"
+                        loading="lazy"
                       />
                       <div class="mt-3 text-xl font-bold">
                         {post.frontmatter.title}

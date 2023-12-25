@@ -5,6 +5,8 @@ layout: ../../layouts/BlogPost.astro
 tags:
   - Desk
 heroImage: https://images.unsplash.com/photo-1509718443690-d8e2fb3474b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3540&q=80
+imageWidth: 3540
+imageHeight: 2360
 ---
 
 

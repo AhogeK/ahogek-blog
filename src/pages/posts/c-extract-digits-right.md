@@ -6,6 +6,8 @@ tags:
   - C
   - Algorithm
 heroImage: https://w.wallhaven.cc/full/o5/wallhaven-o575r9.jpg
+imageWidth: 3840
+imageHeight: 2160
 ---
 
 # 取一个数从右边第 p 位开始向右数 n 位的字段理解

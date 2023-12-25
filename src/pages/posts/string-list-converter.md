@@ -5,6 +5,8 @@ layout: ../../layouts/BlogPost.astro
 tags:
   - Java
 heroImage: https://w.wallhaven.cc/full/kx/wallhaven-kxdp9m.jpg
+imageWidth: 1205
+imageHeight: 1920
 ---
 
 > 算是工作中比较常用的操作，记录一下

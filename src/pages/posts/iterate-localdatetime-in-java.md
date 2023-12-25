@@ -5,6 +5,8 @@ layout: ../../layouts/BlogPost.astro
 tags:
   - Java
 heroImage: https://trendblog.net/wp-content/uploads/2022/02/21-218111_multithreading-and-parallel-computing-in-java-java-background.jpg
+imageWidth: 2048
+imageHeight: 1152
 ---
 
 ![img](/20210331163010597.png)
