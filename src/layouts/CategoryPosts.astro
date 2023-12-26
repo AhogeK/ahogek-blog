@@ -45,7 +45,7 @@ const posts = (await Astro.glob('../pages/posts/*.md'))
                 <li class="text-center mb-4">
                   <a href={post.url}>
                     <Image
-                      class="border border-slate-300 dark:border-zinc-700 rounded-xl"
+                      class="border border-slate-300 dark:border-zinc-700 rounded-xl aspect-[16/9] object-cover"
                       src={post.frontmatter.heroImage}
                       width={post.frontmatter.imageWidth}
                       height={post.frontmatter.imageHeight}
