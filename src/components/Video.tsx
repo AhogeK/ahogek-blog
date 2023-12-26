@@ -110,7 +110,7 @@ const Video: React.FC = () => {
           preload='auto'
           ref={video}
         ></video>
-        <div onClick={handleVolume} className='absolute bottom-2 right-2'>
+        <div onClick={handleVolume} className='absolute bottom-2 right-2 cursor-pointer'>
           {handleVolumeIcon}
         </div>
       </div>
