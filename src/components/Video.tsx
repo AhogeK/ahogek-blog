@@ -47,6 +47,7 @@ const Video: React.FC = () => {
       }
     }
     setShowVolume(true)
+    setHidingTime(3000)
   }, [currentVideoIndex])
 
   useEffect(() => {
