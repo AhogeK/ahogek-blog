@@ -9,10 +9,10 @@ const Video: React.FC = () => {
   const [isMuted, setIsMuted] = useState(true)
   const [showVolume, setShowVolume] = useState(false)
   const [nodeJSTimeout, setNodeJSTimeout] = useState<NodeJS.Timeout>()
-  const [videoList, setVideoList] = useState<string[]>([
+  const videoList = useMemo(() => [
     'https://ahogek.com/uploads/video/20231201/cherry_blossom_tree_artistic_confession/cherry_blossom_tree_artistic_confession.m3u8',
     'https://ahogek.com/uploads/video/20231029/one-more-time-one-more-chance/one-more-time-one-more-chance.m3u8'
-  ])
+  ], [])
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
 
   const video = useRef<HTMLVideoElement>(null)
@@ -79,7 +79,7 @@ const Video: React.FC = () => {
   }, [isMuted, showVolume])
 
   return (
-    <div className='absolute w-full h-full overflow-hidden'
+    <button className='absolute w-full h-full overflow-hidden'
          onMouseEnter={() => {
            if (!isMobile) {
              setShowVolume(true)
@@ -111,11 +111,11 @@ const Video: React.FC = () => {
           preload='auto'
           ref={video}
         ></video>
-        <div onClick={handleVolume} className='absolute bottom-2 right-2 cursor-pointer'>
+        <button onClick={handleVolume} className='absolute bottom-2 right-2 cursor-pointer'>
           {handleVolumeIcon}
-        </div>
+        </button>
       </div>
-    </div>
+    </button>
   )
 }
 
