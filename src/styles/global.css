@@ -11,3 +11,8 @@ body {
   /* 指定文本溢出时的换行方式。在这个例子中，它设置为 "break-word"，表示在单词边界处换行，以防止文本溢出容器。 */
   overflow-wrap: break-word;
 }
+
+html {
+  padding-right: 0px !important;
+  overflow-y: scroll !important;
+}
