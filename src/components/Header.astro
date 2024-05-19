@@ -1,16 +1,16 @@
 ---
 import HeaderLink from './HeaderLink.astro'
 import { SITE_TITLE } from '../config'
-import {
-  IoLogoGithub,
-  IoLogoTwitter,
-  IoHome,
-  IoBook,
-  IoPersonCircleSharp
-} from 'react-icons/io5/index.js'
-import { BsFillChatRightHeartFill } from 'react-icons/bs/index.js'
 import ThemeToggle from './ThemeToggleButton'
 import DropdownMenu from './DropdownMenu'
+import {
+  IoBook,
+  IoHome,
+  IoLogoGithub,
+  IoLogoTwitter,
+  IoPersonCircleSharp
+} from 'react-icons/io5'
+import { BsFillChatRightHeartFill } from 'react-icons/bs'
 
 const allPosts = await Astro.glob('../pages/posts/*.md')
 const allTags = new Set<string>()

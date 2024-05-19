@@ -1,4 +1,4 @@
-import { Menu, Transition } from '@headlessui/react'
+import { Menu, MenuButton, MenuItems, Transition } from '@headlessui/react'
 import React, { Fragment, useState } from 'react'
 import DropdownMenuItem from './DropdownMenuItem'
 import DropdownMenuIcon from './icons/dropdown-menu-icon'
@@ -7,7 +7,7 @@ interface Props {
   tags: string[]
 }
 
-export default function DropdownMenu({ tags }: Props) {
+export default function DropdownMenu({ tags }: Readonly<Props>) {
   const [isFocused, setIsFocused] = useState(false)
 
   const handleButtonFocus = () => {
@@ -60,7 +60,7 @@ export default function DropdownMenu({ tags }: Props) {
       {({ close }) => (
         <>
           <div>
-            <Menu.Button
+            <MenuButton
               onMouseDown={event => event.preventDefault()}
               className="inline-flex justify-center rounded-md border border-zinc-400 dark:border-zinc-700 px-2 py-2 text-sm font-medium 
               shadow-sm ui-open:bg-orange-200 dark:ui-open:bg-zinc-800 ui-open:outline-none focus:outline-none ui-open:ring-2 
@@ -68,7 +68,7 @@ export default function DropdownMenu({ tags }: Props) {
               aria-label="menu"
             >
               <DropdownMenuIcon />
-            </Menu.Button>
+            </MenuButton>
           </div>
           <div
             onFocus={handleButtonFocus}
@@ -83,7 +83,7 @@ export default function DropdownMenu({ tags }: Props) {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md border border-zinc-400 dark:border-zinc-700 bg-orange-50 dark:bg-zinc-800 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none divide-zinc-400 dark:divide-zinc-700">
+              <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md border border-zinc-400 dark:border-zinc-700 bg-orange-50 dark:bg-zinc-800 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none divide-zinc-400 dark:divide-zinc-700">
                 <div className="py-1">
                   <div className="px-3 py-2 uppercase font-bold text-base">
                     标签
@@ -99,7 +99,7 @@ export default function DropdownMenu({ tags }: Props) {
                     )
                   })}
                 </div>
-              </Menu.Items>
+              </MenuItems>
             </Transition>
           </div>
         </>
