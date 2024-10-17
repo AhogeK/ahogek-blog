@@ -24,12 +24,6 @@ function getFileTimes(filePath: string) {
   post.frontmatter.createdAt = times.created
   post.frontmatter.updatedAt = times.modified
 })
-
-const posts = (await Astro.glob('./posts/*.md')).sort(
-  (a: any, b: any) =>
-    new Date(b.frontmatter.createdAt).valueOf() -
-    new Date(a.frontmatter.createdAt).valueOf()
-)
 ---
 
 <!DOCTYPE>
