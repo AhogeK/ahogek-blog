@@ -8,10 +8,12 @@ import Content from '@components/Content.astro'
 import Masthead from '@components/Masthead.astro'
 import { IoChevronForward } from 'react-icons/io5'
 import fs from 'fs'
+import * as console from 'node:console'
 
 // 获取文件创建和修改时间的函数
 function getFileTimes(filePath: string) {
   const stats = fs.statSync(filePath)
+  console.log(stats)
   return {
     created: stats.birthtime,
     modified: stats.mtime
@@ -28,29 +30,30 @@ function getFileTimes(filePath: string) {
 
 <!DOCTYPE>
 <html>
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <Body>
-    <Header titile={SITE_TITLE} />
-    <main class="pt-[56px]">
-      <Masthead />
-      <Content>
-        <section>
-          <h1 class="text-3xl text-center font-mplus mt-12 mb-8">
-            糟糕 ☹️  未找到该页面
-          </h1>
-          <div class="text-center py-4">
-            <a
-              class="inline-flex items-center gap-1 underline underline-offset-2 decoration-orange-500"
-              href="/"
-            >
-              回到首页 <IoChevronForward />
-            </a>
-          </div>
-        </section>
-      </Content>
-    </main>
-    <Footer />
-  </Body>
+<head>
+  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+</head>
+<Body>
+<Header titile={SITE_TITLE} />
+<main class='pt-[56px]'>
+  <Masthead />
+  <Content>
+    <section>
+      <h1 class='text-3xl text-center font-mplus mt-12 mb-8'>
+        糟糕 ☹️ 未找到该页面
+      </h1>
+      <div class='text-center py-4'>
+        <a
+          class='inline-flex items-center gap-1 underline underline-offset-2 decoration-orange-500'
+          href='/'
+        >
+          回到首页
+          <IoChevronForward />
+        </a>
+      </div>
+    </section>
+  </Content>
+</main>
+<Footer />
+</Body>
 </html>

@@ -9,6 +9,24 @@ import { HOMEPAGE_URL } from '../config'
 import Masthead from '@components/Masthead.astro'
 import { Image } from 'astro:assets'
 import { IoArrowForward } from 'react-icons/io5'
+import fs from 'fs'
+
+// 获取文件创建和修改时间的函数
+function getFileTimes(filePath: string) {
+  const stats = fs.statSync(filePath)
+  console.log(stats)
+  return {
+    created: stats.birthtime,
+    modified: stats.mtime
+  }
+}
+
+// 设置文章的创建时间和修改时间
+;(await Astro.glob('./posts/*.md')).forEach((post: any) => {
+  const times = getFileTimes(post.file)
+  post.frontmatter.createdAt = times.created
+  post.frontmatter.updatedAt = times.modified
+})
 
 const posts = (await Astro.glob('./posts/*.md')).sort(
   (a: any, b: any) =>
