@@ -4,7 +4,7 @@ description: 使用 Java8 中的 ChronoUnti 实现两个不同日子的 LocalDat
 layout: ../../layouts/BlogPost.astro
 tags:
   - Java
-heroImage: https://trendblog.net/wp-content/uploads/2022/02/21-218111_multithreading-and-parallel-computing-in-java-java-background.jpg
+heroImage: /java.png
 imageWidth: 2048
 imageHeight: 1152
 ---

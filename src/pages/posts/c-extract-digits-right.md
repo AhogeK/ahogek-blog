@@ -5,7 +5,7 @@ layout: ../../layouts/BlogPost.astro
 tags:
   - C
   - Algorithm
-heroImage: https://w.wallhaven.cc/full/o5/wallhaven-o575r9.jpg
+heroImage: /c-extract-digits-right.png
 imageWidth: 3840
 imageHeight: 2160
 ---

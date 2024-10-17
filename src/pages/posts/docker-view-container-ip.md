@@ -4,7 +4,7 @@ description: 利用 Docker inspect 指令查看 Docker 容器中的 IP
 layout: ../../layouts/BlogPost.astro
 tags:
   - Docker
-heroImage: https://w.wallhaven.cc/full/p9/wallhaven-p9gr59.jpg
+heroImage: /docker-view-container-ip.png
 imageWidth: 1536
 imageHeight: 2048
 ---

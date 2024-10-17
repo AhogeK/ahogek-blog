@@ -4,7 +4,7 @@ description: Java8逗号分隔字符串转列表及列表转逗号分隔字符�
 layout: ../../layouts/BlogPost.astro
 tags:
   - Java
-heroImage: https://w.wallhaven.cc/full/kx/wallhaven-kxdp9m.jpg
+heroImage: /string-list-converter.png
 imageWidth: 1205
 imageHeight: 1920
 ---
