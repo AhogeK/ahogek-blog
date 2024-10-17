@@ -1,12 +1,35 @@
 ---
-import BaseHead from "@components/BaseHead.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "src/config";
-import Body from "@components/Body.astro";
-import Content from "@components/Content.astro";
-import Masthead from "@components/Masthead.astro";
-import { IoChevronForward } from "react-icons/io5";
+import BaseHead from '@components/BaseHead.astro'
+import Header from '@components/Header.astro'
+import Footer from '@components/Footer.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from 'src/config'
+import Body from '@components/Body.astro'
+import Content from '@components/Content.astro'
+import Masthead from '@components/Masthead.astro'
+import { IoChevronForward } from 'react-icons/io5'
+import fs from 'fs'
+
+// 获取文件创建和修改时间的函数
+function getFileTimes(filePath: string) {
+  const stats = fs.statSync(filePath)
+  return {
+    created: stats.birthtime,
+    modified: stats.mtime
+  }
+}
+
+// 设置文章的创建时间和修改时间
+;(await Astro.glob('./posts/*.md')).forEach((post: any) => {
+  const times = getFileTimes(post.file)
+  post.frontmatter.createdAt = times.created
+  post.frontmatter.updatedAt = times.modified
+})
+
+const posts = (await Astro.glob('./posts/*.md')).sort(
+  (a: any, b: any) =>
+    new Date(b.frontmatter.createdAt).valueOf() -
+    new Date(a.frontmatter.createdAt).valueOf()
+)
 ---
 
 <!DOCTYPE>
