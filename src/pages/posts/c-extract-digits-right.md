@@ -8,6 +8,7 @@ tags:
 heroImage: /c-extract-digits-right.png
 imageWidth: 3840
 imageHeight: 2160
+createdAt: 2021/10/02 16:39:16
 ---
 
 # 取一个数从右边第 p 位开始向右数 n 位的字段理解

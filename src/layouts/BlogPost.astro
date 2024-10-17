@@ -6,6 +6,7 @@ import Body from '@components/Body.astro'
 import Content from '@components/Content.astro'
 import { SITE_TITLE } from 'src/config'
 import { IoTimeOutline } from 'react-icons/io5'
+import * as console from 'node:console'
 
 export interface Props {
   content: {
@@ -25,6 +26,7 @@ const {
 // 将原始日期转换为 Date 对象
 const createdAtDate = new Date(createdAt)
 
+// 格式化时间
 const formattedCreatedAt = createdAtDate.toLocaleString('zh-CN', {
   year: 'numeric',
   month: '2-digit',
@@ -36,134 +38,147 @@ const formattedCreatedAt = createdAtDate.toLocaleString('zh-CN', {
 ---
 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <BaseHead
-      title={title + ` / ${SITE_TITLE}`}
-      description={description}
-      image={heroImage}
-    />
-  </head>
+<html lang='en'>
+<head>
+  <BaseHead
+    title={title + ` / ${SITE_TITLE}`}
+    description={description}
+    image={heroImage}
+  />
+</head>
 
-  <Body>
-    <Header />
-    <main class="pt-[56px]">
-      <Content className="pt-6">
-        <div class="mb-8">
-          {
-            heroImage && (
-              <img
-                class="border border-slate-300 dark:border-zinc-700 rounded-xl"
-                width={720}
-                height={360}
-                src={heroImage}
-                alt=""
-              />
-            )
-          }
-        </div>
-        <h1 class="text-3xl my-1 font-mplus">
-          {title}
-        </h1>
-        <div>
-          {description}
-        </div>
-        <div class="text-xs text-gray-500 dark:text-gray-400 mt-2">
-          <IoTimeOutline className={'inline'} /> 于 {formattedCreatedAt} 发布
-        </div>
-        <hr class="border-top border-zinc-400 my-4" />
-        <div class="post-content">
-          <slot />
-        </div>
-        <span
-          class="underline underline-offset-2 hover:text-orange-500 decoration-orange-500 text-2xl list-disc"
-        ></span>
-      </Content>
-    </main>
-    <Footer />
-  </Body>
-  <style lang="scss" is:global>
-    .post-content {
-      h1 {
-        @apply text-4xl font-bold font-mplus;
+<Body>
+<Header />
+<main class='pt-[56px]'>
+  <Content className='pt-6'>
+    <div class='mb-8'>
+      {
+        heroImage && (
+          <img
+            class='border border-slate-300 dark:border-zinc-700 rounded-xl'
+            width={720}
+            height={360}
+            src={heroImage}
+            alt=''
+          />
+        )
       }
-      h2 {
-        @apply text-2xl font-bold font-mplus;
-      }
-      h3 {
-        @apply text-xl font-bold font-mplus;
-      }
-      h4 {
-        @apply text-lg font-bold font-mplus;
-      }
-      h5 {
-        @apply font-bold font-mplus;
-      }
-      h6 {
-        @apply font-bold font-mplus;
-      }
-      img {
-        @apply border border-slate-300 dark:border-zinc-700 rounded-xl mt-6 mb-6;
-      }
-      p {
-        @apply mb-6;
-      }
-      a {
-        @apply underline underline-offset-2 hover:text-orange-500 decoration-orange-500;
-      }
-      ul {
-        @apply list-disc;
-      }
-      pre {
-        @apply p-4 rounded-xl relative mt-6 mb-6;
-        copy-code-button {
-          @apply absolute right-1;
-          top: -1rem;
-        }
-      }
-      p {
-        code {
-          @apply bg-gray-200 p-0.5 text-red-500 rounded-md text-sm dark:bg-gray-700 dark:text-white pl-1 pr-1;
-        }
-      }
-      blockquote {
-        @apply border-l-4 border-gray-300 bg-gray-200 dark:border-orange-500 dark:bg-gray-800 pl-4 my-4 pt-2 pb-2;
-        p {
-          @apply mb-0;
-        }
+    </div>
+    <h1 class='text-3xl my-1 font-mplus'>
+      {title}
+    </h1>
+    <div>
+      {description}
+    </div>
+    <div class='text-xs text-gray-500 dark:text-gray-400 mt-2'>
+      <IoTimeOutline className={'inline'} />
+      于 {formattedCreatedAt} 发布
+    </div>
+    <hr class='border-top border-zinc-400 my-4' />
+    <div class='post-content'>
+      <slot />
+    </div>
+    <span
+      class='underline underline-offset-2 hover:text-orange-500 decoration-orange-500 text-2xl list-disc'
+    ></span>
+  </Content>
+</main>
+<Footer />
+</Body>
+<style lang='scss' is:global>
+  .post-content {
+    h1 {
+      @apply text-4xl font-bold font-mplus;
+    }
+
+    h2 {
+      @apply text-2xl font-bold font-mplus;
+    }
+
+    h3 {
+      @apply text-xl font-bold font-mplus;
+    }
+
+    h4 {
+      @apply text-lg font-bold font-mplus;
+    }
+
+    h5 {
+      @apply font-bold font-mplus;
+    }
+
+    h6 {
+      @apply font-bold font-mplus;
+    }
+
+    img {
+      @apply border border-slate-300 dark:border-zinc-700 rounded-xl mt-6 mb-6;
+    }
+
+    p {
+      @apply mb-6;
+    }
+
+    a {
+      @apply underline underline-offset-2 hover:text-orange-500 decoration-orange-500;
+    }
+
+    ul {
+      @apply list-disc;
+    }
+
+    pre {
+      @apply p-4 rounded-xl relative mt-6 mb-6;
+      copy-code-button {
+        @apply absolute right-1;
+        top: -1rem;
       }
     }
-  </style>
-  <script>
-    import '@components/CopyCodeButton'
 
-    let blocks = document.querySelectorAll('pre')
-    blocks.forEach(block => {
-      let button = document.createElement('copy-code-button')
-      let isMouseOver = false // 标记鼠标是否在 pre 元素上
+    p {
+      code {
+        @apply bg-gray-200 p-0.5 text-red-500 rounded-md text-sm dark:bg-gray-700 dark:text-white pl-1 pr-1;
+      }
+    }
 
-      // 鼠标进入 pre 元素时，显示 copy-code-button 元素
-      block.addEventListener('mouseenter', () => {
-        isMouseOver = true
-        button.style.display = 'block'
-      })
+    blockquote {
+      @apply border-l-4 border-gray-300 bg-gray-200 dark:border-orange-500 dark:bg-gray-800 pl-4 my-4 pt-2 pb-2;
+      p {
+        @apply mb-0;
+      }
+    }
+  }
+</style>
+<script>
+  import '@components/CopyCodeButton'
 
-      // 鼠标离开 pre 元素时，隐藏 copy-code-button 元素
-      block.addEventListener('mouseleave', () => {
-        isMouseOver = false
-        button.style.display = 'none'
-      })
+  let blocks = document.querySelectorAll('pre')
+  blocks.forEach(block => {
+    let button = document.createElement('copy-code-button')
+    let isMouseOver = false // 标记鼠标是否在 pre 元素上
 
-      // 检查页面是否已加载完成，如果是，则根据鼠标状态来显示或隐藏 copy-code-button 元素
-      document.addEventListener('DOMContentLoaded', () => {
-        if (isMouseOver) {
-          button.style.display = 'block'
-        } else {
-          button.style.display = 'none'
-        }
-      })
-
-      block.appendChild(button)
+    // 鼠标进入 pre 元素时，显示 copy-code-button 元素
+    block.addEventListener('mouseenter', () => {
+      isMouseOver = true
+      button.style.display = 'block'
     })
-  </script>
+
+    // 鼠标离开 pre 元素时，隐藏 copy-code-button 元素
+    block.addEventListener('mouseleave', () => {
+      isMouseOver = false
+      button.style.display = 'none'
+    })
+
+    // 检查页面是否已加载完成，如果是，则根据鼠标状态来显示或隐藏 copy-code-button 元素
+    document.addEventListener('DOMContentLoaded', () => {
+      if (isMouseOver) {
+        button.style.display = 'block'
+      } else {
+        button.style.display = 'none'
+      }
+    })
+
+    block.appendChild(button)
+  })
+</script>
 </html>

@@ -7,25 +7,6 @@ import Body from '@components/Body.astro'
 import Content from '@components/Content.astro'
 import Masthead from '@components/Masthead.astro'
 import { IoChevronForward } from 'react-icons/io5'
-import fs from 'fs'
-import * as console from 'node:console'
-
-// 获取文件创建和修改时间的函数
-function getFileTimes(filePath: string) {
-  const stats = fs.statSync(filePath)
-  console.log(stats)
-  return {
-    created: stats.birthtime,
-    modified: stats.mtime
-  }
-}
-
-// 设置文章的创建时间和修改时间
-;(await Astro.glob('./posts/*.md')).forEach((post: any) => {
-  const times = getFileTimes(post.file)
-  post.frontmatter.createdAt = times.created
-  post.frontmatter.updatedAt = times.modified
-})
 ---
 
 <!DOCTYPE>

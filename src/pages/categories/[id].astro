@@ -5,9 +5,8 @@ export async function getStaticPaths() {
   const allPosts = await Astro.glob('../posts/*.md')
   const allTags = new Set<string>()
   allPosts.map(post => {
-    console.log(post)
     post.frontmatter.tags &&
-      post.frontmatter.tags.map((tag: string) => allTags.add(tag))
+    post.frontmatter.tags.map((tag: string) => allTags.add(tag))
   })
 
   return Array.from(allTags).map(tag => {

@@ -7,6 +7,7 @@ tags:
 heroImage: /docker-view-container-ip.png
 imageWidth: 1536
 imageHeight: 2048
+createdAt: 2021/08/06 14:25:18
 ---
 
 > 在 Docker 指令中有一个 `inspect` 可以查看容器的详细信息，只需要
