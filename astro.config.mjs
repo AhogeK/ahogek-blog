@@ -3,7 +3,7 @@
  * @author AhogeK ahogek@gmail.com
  * @date 2022-01-16
  */
-import { defineConfig, squooshImageService } from 'astro/config'
+import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 import react from '@astrojs/react'
 import tailwind from '@astrojs/tailwind'
@@ -24,7 +24,6 @@ export default defineConfig({
     tailwind()
   ],
   image: {
-    service: squooshImageService(),
     remotePatterns: [{ protocol: "https" }]
   }
 })
