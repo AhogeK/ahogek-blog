@@ -15,64 +15,75 @@ import type { MarkdownInstance } from 'astro'
 import type { Frontmatter } from '../types'
 
 const allPosts = Object.values(import.meta
-    .glob<MarkdownInstance<Frontmatter>>('./posts/*.md', { eager: true }))
+  .glob<MarkdownInstance<Frontmatter>>('../pages/posts/*.md', { eager: true }))
 const allTags = new Set<string>()
 allPosts.map(post => {
   post.frontmatter.tags &&
-    post.frontmatter.tags.map((tag: string) => allTags.add(tag))
+  post.frontmatter.tags.map((tag: string) => allTags.add(tag))
 })
 ---
 
 <style>
-  @keyframes shake {
-    0%,
-    100% {
-      transform: translateX(0);
+    @keyframes shake {
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+            transform: translateX(-1px);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+            transform: translateX(1px);
+        }
     }
-    10%,
-    30%,
-    50%,
-    70%,
-    90% {
-      transform: translateX(-1px);
-    }
-    20%,
-    40%,
-    60%,
-    80% {
-      transform: translateX(1px);
-    }
-  }
 
-  .title-h2:hover .icon-shake {
-    animation: shake 0.5s linear;
-  }
+    .title-h2:hover .icon-shake {
+        animation: shake 0.5s linear;
+    }
 </style>
 
-<header class="fixed w-full p-2 z-20 backdrop-blur-md">
-  <div class="mx-auto max-w-3xl">
-    <nav class="flex items-center gap-3 text-base">
-      <a href="/" class="group">
+<header class='fixed w-full p-2 z-20 backdrop-blur-md'>
+  <div class='mx-auto max-w-3xl'>
+    <nav class='flex items-center gap-3 text-base'>
+      <a href='/' class='group'>
         <h2
-          class="font-semibold tracking-tighter p-2 font-mplus text-lg flex items-center title-h2"
+          class='font-semibold tracking-tighter p-2 font-mplus text-lg flex items-center title-h2'
         >
-          <BsFillChatRightHeartFill className="icon-shake" />
-          <span class="mr-1"></span>
+          <BsFillChatRightHeartFill className='icon-shake' />
+          <span class='mr-1'></span>
           {SITE_TITLE}
         </h2>
       </a>
-      <div class="items-center gap-6 hidden md:flex">
-        <HeaderLink href="/"><IoHome /> 首页</HeaderLink>
-        <HeaderLink href="/blog"><IoBook /> 文章</HeaderLink>
-        <HeaderLink href="/about"><IoPersonCircleSharp /> 关于我</HeaderLink>
-        <HeaderLink href="https://twitter.com/AhogeKnight" target="_blank">
-          <IoLogoTwitter /> Twitter
+      <div class='items-center gap-6 hidden md:flex'>
+        <HeaderLink href='/'>
+          <IoHome />
+          首页
         </HeaderLink>
-        <HeaderLink href="https://github.com/AhogeK" target="_blank">
-          <IoLogoGithub /> Github
+        <HeaderLink href='/blog'>
+          <IoBook />
+          文章
+        </HeaderLink>
+        <HeaderLink href='/about'>
+          <IoPersonCircleSharp />
+          关于我
+        </HeaderLink>
+        <HeaderLink href='https://twitter.com/AhogeKnight' target='_blank'>
+          <IoLogoTwitter />
+          Twitter
+        </HeaderLink>
+        <HeaderLink href='https://github.com/AhogeK' target='_blank'>
+          <IoLogoGithub />
+          Github
         </HeaderLink>
       </div>
-      <div class="flex-1"></div>
+      <div class='flex-1'></div>
       <ThemeToggle client:load />
       <DropdownMenu client:load tags={Array.from(allTags)} />
     </nav>
