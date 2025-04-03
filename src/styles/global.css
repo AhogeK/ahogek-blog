@@ -1,3 +1,12 @@
+:root {
+  --icon-stroke-color: #27272a; /* zinc-900 浅色模式下的颜色 */
+  transition: --icon-stroke-color 500ms ease;
+}
+
+:root.dark {
+  --icon-stroke-color: #d4d4d8; /* zinc-300 深色模式下的颜色 */
+}
+
 .dark {
   color-scheme: dark;
 }
