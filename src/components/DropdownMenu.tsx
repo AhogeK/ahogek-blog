@@ -71,6 +71,7 @@ export default function DropdownMenu({ tags }: Readonly<Props>) {
                 className='inline-flex justify-center rounded-md border border-zinc-400 dark:border-zinc-700 px-2 py-2 text-sm font-medium
                shadow-sm ui-open:bg-orange-200 dark:ui-open:bg-zinc-800 ui-open:outline-none focus:outline-none ui-open:ring-2
                ui-open:ring-indigo-500 ui-open:ring-offset-2 ui-open:ring-offset-gray-100
+               cursor-pointer
                /* 精确控制哪些属性有过渡效果 */
                transition-colors'
                 aria-label='menu'

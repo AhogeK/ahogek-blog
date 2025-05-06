@@ -1,6 +1,6 @@
-/** 
+/**
  * Tailwind CSS 的配置文件，定义了如何定制 Tailwind CSS 的样式
- * 
+ *
  * content：指定哪些文件包含了需要构建样式的样式代码。在这个例子中，
  * 它指定了 src 目录下的所有 .astro、.html、.js、.jsx、.md、.mdx、
  * .svelte、.ts、.tsx、.vue 文件都包含需要构建的样式代码。
@@ -12,8 +12,8 @@
  * 这样，我们就可以在样式中使用这个字体族了。
  * plugins：用于定义 Tailwind CSS 插件相关的配置，例如自定义样式、
  * 响应式变化等。
- * 
- * @type {import('tailwindcss').Config} 
+ *
+ * @type {import('tailwindcss').Config}
  **/
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],

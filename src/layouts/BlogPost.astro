@@ -6,7 +6,6 @@ import Body from '@components/Body.astro'
 import Content from '@components/Content.astro'
 import { SITE_TITLE } from 'src/config'
 import { IoTimeOutline } from 'react-icons/io5'
-import * as console from 'node:console'
 
 export interface Props {
   content: {
@@ -87,64 +86,121 @@ const formattedCreatedAt = createdAtDate.toLocaleString('zh-CN', {
 </Body>
 <style lang='scss' is:global>
   .post-content {
-    h1 {
-      @apply text-4xl font-bold font-mplus;
+    & h1 {
+      font-size: 2.25rem; /* text-4xl */
+      font-weight: 700; /* font-bold */
+      font-family: 'M PLUS Rounded 1c', sans-serif; /* font-mplus */
+      line-height: 2.5rem; /* 确保足够的行高 */
+      margin-bottom: 0.5rem; /* 添加底部间距 */
     }
 
-    h2 {
-      @apply text-2xl font-bold font-mplus;
+    & h2 {
+      font-size: 1.5rem; /* text-2xl */
+      font-weight: 700;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      line-height: 2rem; /* 调整行高 */
+      margin-bottom: 0.5rem; /* 底部间距 */
     }
 
-    h3 {
-      @apply text-xl font-bold font-mplus;
+    & h3 {
+      font-size: 1.25rem; /* text-xl */
+      font-weight: 700;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      line-height: 1.75rem; /* 调整行高 */
+      margin-bottom: 0.5rem;
     }
 
-    h4 {
-      @apply text-lg font-bold font-mplus;
+    & h4 {
+      font-size: 1.125rem; /* text-lg */
+      font-weight: 700;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      line-height: 1.75rem; /* 调整行高 */
     }
 
-    h5 {
-      @apply font-bold font-mplus;
+    & h5, & h6 {
+      font-weight: 700;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      line-height: 1.5rem; /* 基础行高 */
     }
 
-    h6 {
-      @apply font-bold font-mplus;
+    & img {
+      border: 1px solid rgb(203 213 225); /* border border-slate-300 */
+      border-radius: 0.75rem; /* rounded-xl */
+      margin-top: 1.5rem; /* mt-6 */
+      margin-bottom: 1.5rem; /* mb-6 */
+      display: block; /* 确保图片正确显示 */
+      max-width: 100%; /* 响应式显示 */
     }
 
-    img {
-      @apply border border-slate-300 dark:border-zinc-700 rounded-xl mt-6 mb-6;
+    @media (prefers-color-scheme: dark) {
+      & img {
+        border-color: rgb(63 63 70); /* dark:border-zinc-700 */
+      }
     }
 
-    p {
-      @apply mb-6;
+    & p {
+      margin-bottom: 1.5rem; /* mb-6 */
+      line-height: 1.625; /* 适当的行高 */
     }
 
-    a {
-      @apply underline underline-offset-2 hover:text-orange-500 decoration-orange-500;
+    & a {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: rgb(249 115 22); /* decoration-orange-500 */
+
+      &:hover {
+        color: rgb(249 115 22); /* hover:text-orange-500 */
+      }
     }
 
-    ul {
-      @apply list-disc;
+    & ul {
+      list-style-type: disc; /* list-disc */
+      padding-left: 1.5rem; /* 添加左侧缩进 */
+      margin-bottom: 1.5rem; /* 底部间距 */
     }
 
-    pre {
-      @apply p-4 rounded-xl relative mt-6 mb-6;
-      copy-code-button {
-        @apply absolute right-1;
+    & pre {
+      padding: 1rem; /* p-4 */
+      border-radius: 0.75rem; /* rounded-xl */
+      position: relative; /* relative */
+      margin-top: 1.5rem; /* mt-6 */
+      margin-bottom: 1.5rem; /* mb-6 */
+      overflow: auto; /* 确保代码可滚动 */
+
+      & copy-code-button {
+        position: absolute; /* absolute */
+        right: 0.25rem; /* right-1 */
         top: -1rem;
       }
     }
 
-    p {
-      code {
-        @apply bg-gray-200 p-0.5 text-red-500 rounded-md text-sm dark:bg-gray-700 dark:text-white pl-1 pr-1;
+    & p code {
+      background-color: rgb(229 231 235); /* bg-gray-200 */
+      padding: 0.125rem 0.25rem; /* p-0.5 pl-1 pr-1 合并 */
+      color: rgb(239 68 68); /* text-red-500 */
+      border-radius: 0.375rem; /* rounded-md */
+      font-size: 0.875rem; /* text-sm */
+
+      @media (prefers-color-scheme: dark) {
+        background-color: rgb(55 65 81); /* dark:bg-gray-700 */
+        color: rgb(255 255 255); /* dark:text-white */
       }
     }
 
-    blockquote {
-      @apply border-l-4 border-gray-300 bg-gray-200 dark:border-orange-500 dark:bg-gray-800 pl-4 my-4 pt-2 pb-2;
-      p {
-        @apply mb-0;
+    & blockquote {
+      border-left: 4px solid rgb(209 213 219); /* border-l-4 border-gray-300 */
+      background-color: rgb(229 231 235); /* bg-gray-200 */
+      padding: 0.5rem 0 0.5rem 1rem; /* pl-4 pt-2 pb-2 合并 */
+      margin: 1rem 0; /* my-4 合并 */
+      color: oklch(92.8% 0.006 264.531);
+
+      @media (prefers-color-scheme: dark) {
+        border-left-color: rgb(249 115 22); /* dark:border-orange-500 */
+        background-color: rgb(31 41 55); /* dark:bg-gray-800 */
+      }
+
+      & p {
+        margin-bottom: 0; /* mb-0 */
       }
     }
   }

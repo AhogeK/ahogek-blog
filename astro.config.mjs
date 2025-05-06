@@ -6,12 +6,13 @@
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 import react from '@astrojs/react'
-import tailwind from '@astrojs/tailwind'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://astro.build/config
 export default defineConfig({
   // 网站根地址
   site: 'https://blob.ahogek.com',
+
   // 整合插件
   integrations: [
     // 生成站点地图
@@ -19,11 +20,13 @@ export default defineConfig({
 
     // 支持 React 组件
     react(),
-
-    // 支持 Tailwind CSS
-    tailwind()
   ],
+
   image: {
-    remotePatterns: [{ protocol: "https" }]
+    remotePatterns: [{ protocol: 'https' }]
+  },
+
+  vite: {
+    plugins: [tailwindcss()]
   }
 })
