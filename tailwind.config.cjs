@@ -21,9 +21,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'mplus': ['Verdana', 'sans-serif']
+        'mplus': ['M PLUS Rounded 1c', 'Verdana', 'sans-serif']
       },
       mplus: [
+        'M PLUS Rounded 1c',
         'Verdana',
         'sans-serif'
       ]
