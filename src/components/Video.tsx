@@ -15,6 +15,9 @@ const Video: React.FC = () => {
     []
   )
 
+  // 保存 Hls 实例的引用，用于正确清理
+  const hlsInstance = useRef<Hls | null>(null)
+
   // 获取随机视频索引的函数
   const getRandomVideoIndex = (currentIndex: number, maxIndex: number) => {
     // 如果只有一个视频，就返回 0
@@ -36,41 +39,112 @@ const Video: React.FC = () => {
 
   const video = useRef<HTMLVideoElement>(null)
 
+  // 播放下一个视频的函数
+  const playNextVideo = () => {
+    console.log('Playing next video')
+    const nextIndex = getRandomVideoIndex(currentVideoIndex, videoList.length - 1)
+    console.log(`Current index: ${currentVideoIndex}, Next index: ${nextIndex}`)
+    setCurrentVideoIndex(nextIndex)
+  }
+
   useEffect(() => {
-    if (video.current) {
-      if (currentVideoIndex === 0) {
-        video.current.volume = 0.3
-      } else {
-        video.current.volume = 0.7
-      }
-      if (Hls.isSupported()) {
-        let hls = new Hls()
-        hls.loadSource(videoList[currentVideoIndex])
-        hls.attachMedia(video.current)
-        hls.on(Hls.Events.MANIFEST_PARSED, function() {
-          video.current?.play()
-        })
-        video.current.onended = function() {
-          console.log('end')
-          // 视频结束时随机选择下一个视频
-          const nextIndex = getRandomVideoIndex(currentVideoIndex, videoList.length - 1)
-          setCurrentVideoIndex(nextIndex)
-        }
-      } else if (video.current.canPlayType('application/vnd.apple.mpegurl')) {
-        video.current.src = videoList[currentVideoIndex]
-        video.current.addEventListener('canplay', function() {
-          video.current?.play()
-        })
-        video.current.onended = function() {
-          console.log('end')
-          // 视频结束时随机选择下一个视频
-          const nextIndex = getRandomVideoIndex(currentVideoIndex, videoList.length - 1)
-          setCurrentVideoIndex(nextIndex)
-        }
-      }
+    // 每次 currentVideoIndex 变化时都会执行这个 effect
+    console.log(`Setting up video with index: ${currentVideoIndex}`)
+
+    if (!video.current) return
+
+    // 清理旧的 Hls 实例
+    if (hlsInstance.current) {
+      hlsInstance.current.destroy()
+      hlsInstance.current = null
     }
+
+    // 移除所有旧的事件监听器
+    const videoElement = video.current
+    videoElement.onended = null
+    videoElement.oncanplay = null
+    videoElement.onerror = null
+
+    // 设置音量
+    if (currentVideoIndex === 0) {
+      videoElement.volume = 0.3
+    } else {
+      videoElement.volume = 0.7
+    }
+
+    // HLS 支持的浏览器
+    if (Hls.isSupported()) {
+      const hls = new Hls()
+      hlsInstance.current = hls
+
+      hls.loadSource(videoList[currentVideoIndex])
+      hls.attachMedia(videoElement)
+
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        videoElement.play().catch(err => console.error('Failed to play:', err))
+      })
+
+      // 处理 HLS 错误
+      hls.on(Hls.Events.ERROR, (event, data) => {
+        console.error('HLS error:', data)
+        if (data.fatal) {
+          switch (data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+              // 尝试恢复网络错误
+              console.log('Network error, trying to recover')
+              hls.startLoad()
+              break
+            case Hls.ErrorTypes.MEDIA_ERROR:
+              // 尝试恢复媒体错误
+              console.log('Media error, trying to recover')
+              hls.recoverMediaError()
+              break
+            default:
+              // 无法恢复，销毁实例
+              console.error('Fatal error, cannot recover')
+              hls.destroy()
+              // 播放下一个视频
+              playNextVideo()
+              break
+          }
+        }
+      })
+    }
+    // 原生 HLS 支持（如 Safari）
+    else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+      videoElement.src = videoList[currentVideoIndex]
+    } else {
+      console.error('HLS is not supported in this browser')
+    }
+
+    // 设置视频结束事件
+    videoElement.onended = () => {
+      console.log('Video ended naturally')
+      playNextVideo()
+    }
+
+    // 处理视频错误
+    videoElement.onerror = () => {
+      console.error('Video error occurred')
+      playNextVideo()
+    }
+
     setShowVolume(true)
     setHidingTime(3000)
+
+    // 清理函数
+    return () => {
+      if (hlsInstance.current) {
+        hlsInstance.current.destroy()
+        hlsInstance.current = null
+      }
+
+      if (videoElement) {
+        videoElement.onended = null
+        videoElement.oncanplay = null
+        videoElement.onerror = null
+      }
+    }
   }, [currentVideoIndex, videoList])
 
   useEffect(() => {
@@ -84,7 +158,6 @@ const Video: React.FC = () => {
       )
     }
 
-    // 清理函数
     return () => {
       if (nodeJSTimeout) {
         clearTimeout(nodeJSTimeout)
