@@ -3,11 +3,7 @@ import Hls from 'hls.js'
 import { isMobile } from 'react-device-detect'
 import { BsVolumeMute, BsVolumeUp } from 'react-icons/bs'
 
-interface VideoProps {
-  className?: string
-}
-
-const Video: React.FC<VideoProps> = ({ className = '' }) => {
+const Video: React.FC = () => {
   const [hidingTime, setHidingTime] = useState<number | null>(3000)
   const [isMuted, setIsMuted] = useState(true)
   const [showVolume, setShowVolume] = useState(false)
@@ -98,9 +94,8 @@ const Video: React.FC<VideoProps> = ({ className = '' }) => {
   }, [isMuted, showVolume])
 
   return (
-    <button
-      type='button'
-      className={`absolute w-full h-full overflow-hidden ${className}`}
+    <div
+      className='absolute w-full h-full overflow-hidden'
       onMouseEnter={() => {
         if (!isMobile) {
           setShowVolume(true)
@@ -120,18 +115,6 @@ const Video: React.FC<VideoProps> = ({ className = '' }) => {
           setHidingTime(3000)
         }
       }}
-      // 清理掉 role, tabIndex, onKeyDown 等，因为 button 原生支持
-      aria-label='切换静音控制显示' // 使用实际交互意义的label
-      style={{
-        // 如需去除按钮默认样式或者自定义外观
-        background: 'none',
-        border: 'none',
-        padding: 0,
-        margin: 0,
-        width: '100%',
-        height: '100%',
-        cursor: 'pointer'
-      }}
     >
       <div className='uppercase text-sm mb-4'>
         <video
@@ -150,7 +133,7 @@ const Video: React.FC<VideoProps> = ({ className = '' }) => {
           {handleVolumeIcon}
         </button>
       </div>
-    </button>
+    </div>
   )
 }
 
