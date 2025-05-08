@@ -17,7 +17,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   /* 指定字体的平滑方式。在这个例子中，它设置为 "antialiased"，表示使用抗锯齿技术来平滑字体边缘，使其更加清晰。 */
   -webkit-font-smoothing: antialiased;
   /* 指定文本渲染方式。在这个例子中，它设置为 "optimizeLegibility"，表示优化文本渲染以提高可读性，例如自动调整字距和字形等。 */
