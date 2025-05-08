@@ -3,7 +3,11 @@ import Hls from 'hls.js'
 import { isMobile } from 'react-device-detect'
 import { BsVolumeMute, BsVolumeUp } from 'react-icons/bs'
 
-const Video: React.FC = () => {
+interface VideoProps {
+  className?: string
+}
+
+const Video: React.FC<VideoProps> = ({ className = '' }) => {
   const [hidingTime, setHidingTime] = useState<number | null>(3000)
   const [isMuted, setIsMuted] = useState(true)
   const [showVolume, setShowVolume] = useState(false)
@@ -30,19 +34,19 @@ const Video: React.FC = () => {
         let hls = new Hls()
         hls.loadSource(videoList[currentVideoIndex])
         hls.attachMedia(video.current)
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
           video.current?.play()
         })
-        video.current.onended = function () {
+        video.current.onended = function() {
           console.log('end')
           setCurrentVideoIndex((currentVideoIndex + 1) % videoList.length)
         }
       } else if (video.current.canPlayType('application/vnd.apple.mpegurl')) {
         video.current.src = videoList[currentVideoIndex]
-        video.current.addEventListener('canplay', function () {
+        video.current.addEventListener('canplay', function() {
           video.current?.play()
         })
-        video.current.onended = function () {
+        video.current.onended = function() {
           console.log('end')
           setCurrentVideoIndex((currentVideoIndex + 1) % videoList.length)
         }
@@ -94,8 +98,9 @@ const Video: React.FC = () => {
   }, [isMuted, showVolume])
 
   return (
-    <div
-      className="absolute w-full h-full overflow-hidden"
+    <button
+      type='button'
+      className={`absolute w-full h-full overflow-hidden ${className}`}
       onMouseEnter={() => {
         if (!isMobile) {
           setShowVolume(true)
@@ -115,25 +120,37 @@ const Video: React.FC = () => {
           setHidingTime(3000)
         }
       }}
+      // 清理掉 role, tabIndex, onKeyDown 等，因为 button 原生支持
+      aria-label='切换静音控制显示' // 使用实际交互意义的label
+      style={{
+        // 如需去除按钮默认样式或者自定义外观
+        background: 'none',
+        border: 'none',
+        padding: 0,
+        margin: 0,
+        width: '100%',
+        height: '100%',
+        cursor: 'pointer'
+      }}
     >
-      <div className="uppercase text-sm mb-4">
+      <div className='uppercase text-sm mb-4'>
         <video
-          id="video"
-          className="absolute h-auto left-1/2 top-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-30"
+          id='video'
+          className='absolute h-auto left-1/2 top-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-30'
           autoPlay
           muted
           playsInline
-          preload="auto"
+          preload='auto'
           ref={video}
         ></video>
         <button
           onClick={handleVolume}
-          className="absolute bottom-2 right-2 cursor-pointer"
+          className='absolute bottom-2 right-2 cursor-pointer'
         >
           {handleVolumeIcon}
         </button>
       </div>
-    </div>
+    </button>
   )
 }
 
