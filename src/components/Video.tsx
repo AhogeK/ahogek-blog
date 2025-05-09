@@ -5,6 +5,8 @@ import { BsVolumeMute, BsVolumeUp } from 'react-icons/bs'
 const Video: React.FC = () => {
   const [isMuted, setIsMuted] = useState(true)
   const [showVolume, setShowVolume] = useState(false)
+  // 添加标记，用于跟踪是否已处理触摸事件
+  const touchHandled = useRef(false)
 
   // 使用 ref 管理计时器，避免状态更新问题
   const timerRef = useRef<NodeJS.Timeout | null>(null)
@@ -195,7 +197,7 @@ const Video: React.FC = () => {
   return (
     <div
       className='absolute w-full h-full overflow-hidden'
-      onClick={startHidingTimer} // 简化为直接调用 startHidingTimer
+      onClick={startHidingTimer}
     >
       <div className='uppercase text-sm mb-4'>
         <video
@@ -209,13 +211,29 @@ const Video: React.FC = () => {
         ></video>
         <button
           onClick={(e) => {
-            e.stopPropagation()
-            handleVolume()
+            // 仅在不是由触摸事件触发时处理
+            if (!touchHandled.current) {
+              e.stopPropagation()
+              handleVolume()
+            }
+            // 重置触摸标记
+            touchHandled.current = false
+          }}
+          onTouchStart={(e) => {
+            // 标记为已处理触摸事件
+            touchHandled.current = true
           }}
           onTouchEnd={(e) => {
             e.preventDefault()
             e.stopPropagation()
+            // 在触摸结束时处理音量切换
             handleVolume()
+            // 保持标记，阻止后续的click事件处理
+            touchHandled.current = true
+            // 200ms后重置标记(确保click事件已经触发)
+            setTimeout(() => {
+              touchHandled.current = false
+            }, 200)
           }}
           onMouseEnter={clearHidingTimer}
           onMouseLeave={startHidingTimer}
