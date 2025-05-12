@@ -92,7 +92,7 @@ const Video: React.FC = () => {
     videoElement.onerror = null
 
     // 设置音量
-    videoElement.volume = currentVideoIndex === 0 ? 0.3 : 0.7
+    videoElement.volume = 0.3
 
     // HLS 支持的浏览器
     if (Hls.isSupported()) {
