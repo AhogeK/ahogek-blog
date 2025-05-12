@@ -14,7 +14,9 @@ const Video: React.FC = () => {
   const videoList = useMemo(
     () => [
       'https://ahogek.com/uploads/video/20231201/cherry_blossom_tree_artistic_confession/cherry_blossom_tree_artistic_confession.m3u8',
-      'https://ahogek.com/uploads/video/20231029/one-more-time-one-more-chance/one-more-time-one-more-chance.m3u8'
+      'https://ahogek.com/uploads/video/20231029/one-more-time-one-more-chance/one-more-time-one-more-chance.m3u8',
+      'https://ahogek.com/uploads/video/20250512/i_want_to_love_you_endlessly_and_forever/i_want_to_love_you_endlessly_and_forever.m3u8',
+      'https://ahogek.com/uploads/video/20250512/the_process_of_falling_in_love_is_also_a_form_of_love/the_process_of_falling_in_love_is_also_a_form_of_love.m3u8'
     ],
     []
   )
