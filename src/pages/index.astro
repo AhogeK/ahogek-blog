@@ -33,57 +33,21 @@ const posts = (Object.values(
   <Masthead />
   <Content>
     <section>
-      <p class='mb-8'>
-        Embracing the fear of the unknown, I persist in my coding journey.
-        Even if I'm just a newbie, I code on, hoping to turn the tables one day.
-      </p>
-      <a
-        class='mb-8 inline-flex items-center gap-1 indent-1 text-orange-500'
-        href={HOMEPAGE_URL}
-      >
-        了解更多关于我
-        <IoArrowForward className='inline' />
-      </a>
-    </section>
-    <section>
       <div
         class='relative text-6xl font-mplus font-semibold text-center p-10 border-4 border-dashed border-gray-300 rounded-xl'>
         <div class='animate-pulse'>网站还在开发中<span class='inline-block animate-bounce delay-100'>.</span><span
           class='inline-block animate-bounce delay-200'>.</span><span
           class='inline-block animate-bounce delay-300'>.</span></div>
       </div>
-      {false && (
-        <ul class='grid grid-cols-1 md:grid-cols-2 gap-4'>
-          {
-            posts.map(post => {
-              return (
-                <li class='text-center mb-4'>
-                  <a href={post.url}>
-                    <Image
-                      class='border border-slate-300 dark:border-zinc-700 rounded-xl aspect-[16/9] object-cover'
-                      src={post.frontmatter.heroImage}
-                      width={1920}
-                      height={1080}
-                      alt='Thumbnail'
-                      format={post.frontmatter.imageFormat ?? 'avif'}
-                      decoding='async'
-                      loading='lazy'
-                    />
-                    <div class='mt-3 text-xl font-bold'>
-                      {post.frontmatter.title}
-                    </div>
-                    {post.frontmatter.description && (
-                      <div class='opacity-70'>
-                        {post.frontmatter.description}
-                      </div>
-                    )}
-                  </a>
-                </li>
-              )
-            })
-          }
-        </ul>
-      )}
+    </section>
+    <section class='flex justify-end'>
+      <a
+        class='mt-8 inline-flex items-center gap-1 indent-1 text-orange-500'
+        href={HOMEPAGE_URL}
+      >
+        了解更多关于我
+        <IoArrowForward className='inline' />
+      </a>
     </section>
   </Content>
 </main>

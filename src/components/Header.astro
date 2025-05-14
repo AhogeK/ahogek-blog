@@ -24,32 +24,34 @@ allPosts.map(post => {
 ---
 
 <style>
-    @keyframes shake {
-        0%,
-        100% {
-            transform: translateX(0);
-        }
-        10%,
-        30%,
-        50%,
-        70%,
-        90% {
-            transform: translateX(-1px);
-        }
-        20%,
-        40%,
-        60%,
-        80% {
-            transform: translateX(1px);
-        }
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
     }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateX(-1px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translateX(1px);
+    }
+  }
 
-    .title-h2:hover .icon-shake {
-        animation: shake 0.5s linear;
-    }
+  .title-h2:hover .icon-shake {
+    animation: shake 0.5s linear;
+  }
 </style>
 
-<header class='fixed w-full p-2 z-20 bg-gradient-to-b from-black/70 to-black/30 backdrop-blur-md'>
+<header
+  class='fixed w-full p-2 z-20 bg-gradient-to-b from-orange-50/70 to-orange-50/30
+  dark:from-zinc-900/70 dark:to-zinc-900/30 backdrop-blur-md'>
   <div class='mx-auto max-w-3xl'>
     <nav class='flex items-center gap-3 text-base'>
       <a href='/' class='group'>
