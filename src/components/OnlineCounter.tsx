@@ -43,7 +43,7 @@ const OnlineCounter: React.FC = () => {
   }, [])
 
   return (
-    <div id='online-counter'>
+    <div className='online-counter-nav'>
       <div className='green-dot'></div>
       <span>{userCount}</span>
     </div>

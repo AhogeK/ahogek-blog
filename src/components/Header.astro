@@ -13,6 +13,7 @@ import {
 import { BsFillChatRightHeartFill } from 'react-icons/bs'
 import type { MarkdownInstance } from 'astro'
 import type { Frontmatter } from '../types'
+import OnlineCounter from './OnlineCounter.tsx'
 
 const allPosts = Object.values(import.meta
   .glob<MarkdownInstance<Frontmatter>>('../pages/posts/*.md', { eager: true }))
@@ -53,14 +54,17 @@ allPosts.map(post => {
   class='fixed w-full p-2 z-20 bg-gradient-to-b from-orange-50/70 to-orange-50/30
   dark:from-zinc-900/70 dark:to-zinc-900/30 backdrop-blur-md'>
   <div class='mx-auto max-w-3xl'>
-    <nav class='flex items-center gap-3 text-base'>
+    <nav class='flex items-center justify-between text-base'>
       <a href='/' class='group'>
         <h2
-          class='font-semibold tracking-tighter p-2 font-mplus text-lg flex items-center title-h2'
+          class='font-semibold tracking-tighter font-mplus text-lg flex items-center title-h2'
         >
           <BsFillChatRightHeartFill className='icon-shake' />
           <span class='mr-1'></span>
           {SITE_TITLE}
+          <span class='ml-2'>
+            <OnlineCounter client:load />
+          </span>
         </h2>
       </a>
       <div class='items-center gap-6 hidden md:flex'>
@@ -85,9 +89,10 @@ allPosts.map(post => {
           Github
         </HeaderLink>
       </div>
-      <div class='flex-1'></div>
-      <ThemeToggle client:load />
-      <DropdownMenu client:load tags={Array.from(allTags)} />
+      <div class='flex items-center gap-3'>
+        <ThemeToggle client:load />
+        <DropdownMenu client:load tags={Array.from(allTags)} />
+      </div>
     </nav>
   </div>
 </header>
