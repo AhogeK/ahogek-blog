@@ -11,16 +11,19 @@ const Video: React.FC = () => {
   // 使用 ref 管理计时器，避免状态更新问题
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
-  const videoList = useMemo(
-    () => [
-      'https://ahogek.com/uploads/video/20231201/cherry_blossom_tree_artistic_confession/cherry_blossom_tree_artistic_confession.m3u8',
-      'https://ahogek.com/uploads/video/20231029/one-more-time-one-more-chance/one-more-time-one-more-chance.m3u8',
-      'https://ahogek.com/uploads/video/20250512/i_want_to_love_you_endlessly_and_forever/i_want_to_love_you_endlessly_and_forever.m3u8',
-      'https://ahogek.com/uploads/video/20250512/the_process_of_falling_in_love_is_also_a_form_of_love/the_process_of_falling_in_love_is_also_a_form_of_love.m3u8',
-      'https://ahogek.com/uploads/video/20250707/lelouchs_most_ardent_confession/lelouchs_most_ardent_confession.m3u8'
-    ],
-    []
-  )
+  const videoList = useMemo(() => {
+    const baseUrl = import.meta.env.PUBLIC_VIDEO_BASE_URL || 'https://ahogek.com'
+
+    const videos = [
+      '/uploads/video/20231201/cherry_blossom_tree_artistic_confession/cherry_blossom_tree_artistic_confession.m3u8',
+      '/uploads/video/20231029/one-more-time-one-more-chance/one-more-time-one-more-chance.m3u8',
+      '/uploads/video/20250512/i_want_to_love_you_endlessly_and_forever/i_want_to_love_you_endlessly_and_forever.m3u8',
+      '/uploads/video/20250512/the_process_of_falling_in_love_is_also_a_form_of_love/the_process_of_falling_in_love_is_also_a_form_of_love.m3u8',
+      '/uploads/video/20250707/lelouchs_most_ardent_confession/lelouchs_most_ardent_confession.m3u8'
+    ]
+
+    return videos.map(path => `${baseUrl}${path}`)
+  }, [])
 
   // 保存 Hls 实例的引用
   const hlsInstance = useRef<Hls | null>(null)
