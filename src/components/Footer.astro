@@ -1,20 +1,49 @@
 ---
-import { HOMEPAGE_URL } from "../config";
+import { HOMEPAGE_URL } from '../config'
+import DynamicCounter from './DynamicCounter'
+import React from 'react'
 
 const today = new Date()
 ---
 
-<!-- 
-	text-zinc-500: #9CA3AF
-	p-4: 内边距 1rem
-	text-center: 文字居中
--->
-<footer class="text-zinc-500 p-4 text-center">
-	&copy; 2024 - {today.getFullYear()} <a href={HOMEPAGE_URL}>AhogeK</a>. 保留所有权利.
+<footer class='text-zinc-500 text-center'>
+  <div class='flex flex-col items-center space-y-4'>
+    <!-- 使用 React 组件的动态计数器 -->
+    <DynamicCounter client:load />
+    <!--<div class='flex justify-center'>-->
+    <!--  <img-->
+    <!--    src="https://count.getloli.com/@ahogek?name=ahogek&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=1&num=123456789"-->
+    <!--    alt='访问计数器'-->
+    <!--    class="max-w-full h-auto"-->
+    <!--    loading="lazy"-->
+    <!--    style={{-->
+    <!--      maxHeight: '60px',-->
+    <!--      objectFit: 'contain'-->
+    <!--    }}-->
+    <!--  />-->
+    <!--</div>-->
+    <!-- 版权信息 -->
+    <div class='text-sm'>
+      &copy; 2024 - {today.getFullYear()}
+      <a
+        href={HOMEPAGE_URL}
+        class='text-zinc-400 hover:text-zinc-300 transition-colors duration-200'
+      >
+        AhogeK
+      </a>
+      . 保留所有权利.
+    </div>
+  </div>
 </footer>
+
 <style>
-	footer {
-		padding: 25px;
-		text-align: center;
-	}
+  footer {
+    padding: 2rem 1rem;
+  }
+
+  @media (max-width: 640px) {
+    footer {
+      padding: 1.5rem 1rem;
+    }
+  }
 </style>

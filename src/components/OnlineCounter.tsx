@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const socketUrl = import.meta.env.PUBLIC_WEBSOCKET_URL
+const socketUrl = import.meta.env.PUBLIC_WEBSOCKET_URL + '/online'
 
 const OnlineCounter: React.FC = () => {
   const [userCount, setUserCount] = useState(0)
