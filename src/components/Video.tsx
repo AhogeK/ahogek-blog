@@ -100,7 +100,10 @@ const Video: React.FC = () => {
 
     // HLS 支持的浏览器
     if (Hls.isSupported()) {
-      const hls = new Hls()
+      const hls = new Hls({
+        maxBufferLength: 60,     // 推荐: 允许缓冲区最大60秒
+        maxMaxBufferLength: 120 // 推荐: 缓冲区上限120秒
+      })
       hlsInstance.current = hls
 
       hls.loadSource(videoList[currentVideoIndex])
@@ -112,24 +115,27 @@ const Video: React.FC = () => {
 
       // HLS 错误处理
       hls.on(Hls.Events.ERROR, (event, data) => {
-        console.error('HLS error:', data)
+        if (data.details === 'bufferStalledError' && !data.fatal) {
+          const videoEl = video.current
+          if (videoEl && videoEl.buffered.length > 0) {
+            // 跳转到缓冲区末尾，触发继续加载
+            videoEl.currentTime = videoEl.buffered.end(0) - 0.5
+          }
+          hls.startLoad() // 强制拉新流
+          return  // 避免走 fatal 分支
+        }
+
+        // 下面原 fatal 处理方式照旧
         if (data.fatal) {
           switch (data.type) {
             case Hls.ErrorTypes.NETWORK_ERROR:
-              // 尝试恢复网络错误
-              console.log('Network error, trying to recover')
               hls.startLoad()
               break
             case Hls.ErrorTypes.MEDIA_ERROR:
-              // 尝试恢复媒体错误
-              console.log('Media error, trying to recover')
               hls.recoverMediaError()
               break
             default:
-              // 无法恢复，销毁实例
-              console.error('Fatal error, cannot recover')
               hls.destroy()
-              // 播放下一个视频
               playNextVideo()
               break
           }
