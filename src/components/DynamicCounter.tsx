@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
 interface CounterConfig {
-  name?: string
-  theme?: string
-  padding?: string
-  offset?: string
-  align?: string
-  scale?: string
-  pixelated?: string
-  darkmode?: string | boolean
+  name?: string;
+  theme?: string;
+  padding?: string;
+  offset?: string;
+  align?: string;
+  scale?: string;
+  pixelated?: string;
 }
 
 const socketUrl = import.meta.env.PUBLIC_WEBSOCKET_URL + '/visit-count'
+const COUNTER_BASE_URL = 'https://count.getloli.com'
 
 const DynamicCounter: React.FC<CounterConfig> = ({
                                                    name = 'ahogek',
@@ -23,19 +23,18 @@ const DynamicCounter: React.FC<CounterConfig> = ({
                                                    pixelated = '1'
                                                  }) => {
   const [count, setCount] = useState(0)
+  const [counterUrl, setCounterUrl] = useState('')
   const [isMounted, setIsMounted] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [themeMode, setThemeMode] = useState<'dark' | 'light'>('light')
 
+  // websocket部分，只负责获取count
   useEffect(() => {
-    setIsMounted(true)
     let ws: WebSocket | null = null
     let timer: NodeJS.Timeout | null = null
 
     const connect = () => {
       ws = new WebSocket(socketUrl)
-      ws.onopen = () => {
-        setIsLoading(false)
-      }
       ws.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data)
@@ -66,6 +65,65 @@ const DynamicCounter: React.FC<CounterConfig> = ({
     }
   }, [])
 
+  // 只维护一个主题状态
+  useEffect(() => {
+    const getThemeMode = () =>
+      document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+    setThemeMode(getThemeMode())
+    setIsMounted(true)
+
+    const observer = new MutationObserver(() => {
+      setThemeMode(getThemeMode())
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
+  // 只用本地唯一 themeMode 和 count 构建URL
+  useEffect(() => {
+    const params = new URLSearchParams({
+      name,
+      theme,
+      padding,
+      offset,
+      align,
+      scale,
+      pixelated,
+      darkmode: themeMode === 'dark' ? '1' : '0',
+      num: count.toString()
+    })
+    setCounterUrl(`${COUNTER_BASE_URL}/@${name}?${params.toString()}`)
+    setIsLoading(true)
+  }, [count, themeMode, name, theme, padding, offset, align, scale, pixelated])
+
+  const handleImageLoad = () => {
+    setIsLoading(false)
+  }
+
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    setIsLoading(false)
+    const img = e.target as HTMLImageElement
+    img.src =
+      'data:image/svg+xml;base64,' +
+      btoa(`
+      <svg width='200' height='50' xmlns='http://www.w3.org/2000/svg'>
+        <rect width='200' height='50' fill='#f3f4f6' stroke='#d1d5db'/>
+        <text x='100' y='30' text-anchor='middle' font-size='12' fill='#6b7280'>
+          Counter Service Offline
+        </text>
+      </svg>
+    `)
+  }
+
   if (!isMounted) {
     return (
       <div className='flex justify-center'>
@@ -74,21 +132,6 @@ const DynamicCounter: React.FC<CounterConfig> = ({
     )
   }
 
-  const COUNTER_BASE_URL = 'https://count.getloli.com'
-  // 新增 num 字段作为实时 socket 计数
-  const params = new URLSearchParams({
-    name: name,
-    theme,
-    padding,
-    offset,
-    align,
-    scale,
-    pixelated,
-    darkmode: '0',
-    num: count.toString()
-  })
-  const counterUrl = `${COUNTER_BASE_URL}/@${name}?${params.toString()}`
-
   return (
     <div className='flex justify-center relative'>
       {isLoading && (
@@ -96,7 +139,6 @@ const DynamicCounter: React.FC<CounterConfig> = ({
           <div className='w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin' />
         </div>
       )}
-
       {counterUrl && (
         <img
           src={counterUrl}
@@ -105,6 +147,8 @@ const DynamicCounter: React.FC<CounterConfig> = ({
             isLoading ? 'opacity-50' : 'opacity-100'
           } hover:scale-105`}
           loading='eager'
+          onLoad={handleImageLoad}
+          onError={handleImageError}
           style={{
             maxHeight: '60px',
             objectFit: 'contain'
