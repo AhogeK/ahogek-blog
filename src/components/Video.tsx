@@ -19,7 +19,8 @@ const Video: React.FC = () => {
       '/uploads/video/20231029/one-more-time-one-more-chance/one-more-time-one-more-chance.m3u8',
       '/uploads/video/20250512/i_want_to_love_you_endlessly_and_forever/i_want_to_love_you_endlessly_and_forever.m3u8',
       '/uploads/video/20250512/the_process_of_falling_in_love_is_also_a_form_of_love/the_process_of_falling_in_love_is_also_a_form_of_love.m3u8',
-      '/uploads/video/20250707/lelouchs_most_ardent_confession/lelouchs_most_ardent_confession.m3u8'
+      '/uploads/video/20250707/lelouchs_most_ardent_confession/lelouchs_most_ardent_confession.m3u8',
+      '/uploads/video/20250901/chihaya_anon_are_you_happy/chihaya_anon_are_you_happy.m3u8'
     ]
 
     return videos.map(path => `${baseUrl}${path}`)
