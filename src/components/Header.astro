@@ -2,9 +2,9 @@
 import HeaderLink from './HeaderLink.astro'
 import { SITE_TITLE } from '../config'
 import ThemeToggle from './ThemeToggleButton'
-import DropdownMenu from './DropdownMenu'
+// import DropdownMenu from './DropdownMenu'
 import {
-  IoBook,
+  // IoBook,
   IoHome,
   IoLogoGithub,
   IoLogoTwitter,
@@ -51,7 +51,7 @@ allPosts.map(post => {
 </style>
 
 <header
-  class='fixed w-full p-2 z-20 bg-gradient-to-b from-orange-50/70 to-orange-50/30
+  class='fixed w-full p-2 z-20 bg-linear-to-b from-orange-50/70 to-orange-50/30
   dark:from-zinc-900/70 dark:to-zinc-900/30 backdrop-blur-md'>
   <div class='mx-auto max-w-3xl'>
     <nav class='flex items-center justify-between text-base'>
@@ -72,10 +72,10 @@ allPosts.map(post => {
           <IoHome />
           首页
         </HeaderLink>
-        <HeaderLink href='/blog'>
-          <IoBook />
-          文章
-        </HeaderLink>
+        <!--<HeaderLink href='/blog'>-->
+        <!--  <IoBook />-->
+        <!--  文章-->
+        <!--</HeaderLink>-->
         <HeaderLink href='/about'>
           <IoPersonCircleSharp />
           关于我
@@ -91,7 +91,7 @@ allPosts.map(post => {
       </div>
       <div class='flex items-center gap-3'>
         <ThemeToggle client:load />
-        <DropdownMenu client:load tags={Array.from(allTags)} />
+        <!--<DropdownMenu client:load tags={Array.from(allTags)} />-->
       </div>
     </nav>
   </div>
