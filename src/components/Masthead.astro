@@ -18,27 +18,27 @@ const shouldShow404Masthead = Boolean(type === '404')
           <!-- 旋转光环背景 -->
           <div class='absolute inset-0 w-28 h-28 -translate-x-2 -translate-y-2'>
             <div
-              class='w-full h-full rounded-full bg-gradient-to-r from-orange-400 via-rose-500 to-purple-600 animate-spin opacity-30'
+              class='w-full h-full rounded-full bg-linear-to-r from-orange-400 via-rose-500 to-purple-600 animate-spin opacity-30'
               style='animation-duration: 3s;'></div>
           </div>
 
           <!-- 头像 -->
           <img
-            src='/avatar.jpg'
+            src='/avatar.jpeg'
             alt='AhogeK 头像'
-            class='relative w-24 h-24 rounded-full border-2 border-white/50 shadow-2xl hover:scale-110 transition-all duration-500 hover:border-orange-400'
+            class='relative w-24 h-24 rounded-full border-2 border-white/50 shadow-2xl hover:scale-110 transition-all duration-500 hover:border-orange-400 object-cover'
           />
 
           <!-- 脉冲效果 -->
           <div
-            class='absolute inset-0 w-24 h-24 rounded-full bg-gradient-to-r from-orange-400 to-rose-500 opacity-0 hover:opacity-20 transition-opacity duration-300'></div>
+            class='absolute inset-0 w-24 h-24 rounded-full bg-linear-to-r from-orange-400 to-rose-500 opacity-0 hover:opacity-20 transition-opacity duration-300'></div>
         </div>
 
         <!-- 欢迎文字 -->
         <div class='uppercase text-sm mb-4 tracking-wider'>Welcome to</div>
         <div class='text-4xl font-mplus font'>
           AhogeK 的 <span
-          class='bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-rose-500'> 个人博客</span>
+          class='bg-clip-text text-transparent bg-linear-to-r from-orange-400 to-rose-500'> 个人博客</span>
         </div>
       </div>
     }
