@@ -16,7 +16,7 @@
       ]
     },
     "verbatimModuleSyntax": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"

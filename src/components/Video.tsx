@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Hls from 'hls.js'
 import { BsVolumeMute, BsVolumeUp } from 'react-icons/bs'
 
-const Video: React.FC = () => {
+export default function Video() {
   const [isMuted, setIsMuted] = useState(true)
   const [showVolume, setShowVolume] = useState(false)
   // 添加标记，用于跟踪是否已处理触摸事件
@@ -115,7 +115,7 @@ const Video: React.FC = () => {
       })
 
       // HLS 错误处理
-      hls.on(Hls.Events.ERROR, (event, data) => {
+      hls.on(Hls.Events.ERROR, (_event, data) => {
         if (data.details === 'bufferStalledError' && !data.fatal) {
           const videoEl = video.current
           if (videoEl && videoEl.buffered.length > 0) {
@@ -232,7 +232,7 @@ const Video: React.FC = () => {
             // 重置触摸标记
             touchHandled.current = false
           }}
-          onTouchStart={(e) => {
+          onTouchStart={({}) => {
             // 标记为已处理触摸事件
             touchHandled.current = true
           }}
@@ -259,5 +259,3 @@ const Video: React.FC = () => {
     </div>
   )
 }
-
-export default Video

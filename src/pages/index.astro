@@ -6,12 +6,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
 import Body from '../components/Body.astro'
 import Content from '../components/Content.astro'
 import { HOMEPAGE_URL } from '../config'
-import Masthead from '@components/Masthead.astro'
-import { Image } from 'astro:assets'
 import { IoArrowForward } from 'react-icons/io5'
 import type { MarkdownInstance } from 'astro'
 import type { Frontmatter } from '../types'
-
+import ScrollHero from '@components/ScrollHero'
+import Video from '@components/Video'
 
 const posts = (Object.values(
     import.meta.glob<MarkdownInstance<Frontmatter>>('./posts/*.md', { eager: true }))
@@ -26,20 +25,19 @@ const posts = (Object.values(
 <html lang='en'>
 <head>
   <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  <!-- 消除IDE误报，其实并不需要这行 -->
+  <title>{SITE_TITLE}</title>
 </head>
 <Body>
 <Header title={SITE_TITLE} />
 <main>
-  <Masthead />
+  <!-- ← ScrollHero 组件 -->
+  <ScrollHero client:load>
+    <Video client:load />
+  </ScrollHero>
+
+  <!-- ← 正常内容区域 (解锁后显示) -->
   <Content>
-    <section>
-      <div
-        class='relative text-6xl font-mplus font-semibold text-center p-10 border-4 border-dashed border-gray-300 rounded-xl'>
-        <div class='animate-pulse'>网站还在开发中<span class='inline-block animate-bounce delay-100'>.</span><span
-          class='inline-block animate-bounce delay-200'>.</span><span
-          class='inline-block animate-bounce delay-300'>.</span></div>
-      </div>
-    </section>
     <section class='flex justify-end'>
       <a
         class='mt-8 inline-flex items-center gap-1 indent-1 text-orange-500'
