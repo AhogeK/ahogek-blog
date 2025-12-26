@@ -9,7 +9,7 @@ interface ScrollHeroProps {
  * * Strategy:
  * Instead of switching CSS positions (sticky -> relative), we keep the container
  * sticky for the entire duration. We define a "Timeline" based on scroll pixels.
- * * 0px ------------------ 500px ------------------ 1200px ----------------> End
+ * * 0px ------------------ 1000px ----------------- 2500px ----------------> End
  * [    Entry Animation    ] [    Locked / Unlock    ] [ Natural Scroll Away ]
  */
 export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
@@ -17,11 +17,12 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Configuration: Definition of the "Timeline"
+  // Refactored: Significantly increased values to accommodate fast scrolling/trackpads
   const TIMELINE = {
-    ENTRY_END: 500,     // 0-500px: Avatar fades out, Content rises
-    UNLOCK_START: 500,  // 500px: Content hits center, unlocking starts
-    UNLOCK_END: 1000,   // 1000px: Unlock complete (500px distance to unlock)
-    TOTAL_HEIGHT: 2000 // Total height of the scrollable track
+    ENTRY_END: 2000,      // 0-2000px: 极其缓慢的入场，给用户反应时间
+    UNLOCK_START: 2000,   // 2000px: 内容到达中心，开始锁定
+    UNLOCK_END: 6000,     // 6000px: 解锁完成 (中间有 4000px 的“阻尼”区)
+    TOTAL_HEIGHT: 8000    // 总高度 8000px，确保有足够的缓冲
   }
 
   useEffect(() => {
@@ -55,25 +56,22 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
       }
 
     // Avatar Animation (Parallax Exit)
-    // Starts at 0, fully gone by 400px
-    // Behavior: Moves UP (-50px) and Fades OUT
-    const avatarOpacity = map(scrollY, 0, 300, 1, 0)
-    const avatarTranslate = map(scrollY, 0, 300, 0, -50) // Moves up slightly
+    const avatarFadeEnd = TIMELINE.ENTRY_END * 0.5
+    const avatarOpacity = map(scrollY, 0, avatarFadeEnd, 1, 0)
+    const avatarTranslate = map(scrollY, 0, avatarFadeEnd, 0, -150)
 
     // Content Entry Animation (Rising)
-    // Starts entering at 0px (overlapping with avatar), settles at center by 500px
+    // Starts entering at 0px (overlapping with avatar), settles at center by UNLOCK_START
     // Behavior: Moves from 100vh to 50vh (Center)
-    // Note: We clamp it so it stops exactly at center during the 'Unlock' phase
     let contentY: number // Start at 100vh
     let contentOpacity: number
 
     if (scrollY < TIMELINE.UNLOCK_START) {
       // Entry Phase
-      contentY = map(scrollY, 0, TIMELINE.UNLOCK_START, 100, 50)
-      contentOpacity = map(scrollY, 100, TIMELINE.UNLOCK_START, 0, 1) // Fade in faster
+      contentY = map(scrollY, 0, TIMELINE.UNLOCK_START, 120, 50)
+      contentOpacity = map(scrollY, 100, TIMELINE.UNLOCK_START, 0, 1)
     } else {
       // Locked Phase (Visual Lock)
-      // We simply hold the value at 50vh. No "snapping" because the map function above ends at 50.
       contentY = 50
       contentOpacity = 1
     }
@@ -82,12 +80,6 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
     // Only counts scroll distance between UNLOCK_START and UNLOCK_END
     const rawProgress = (scrollY - TIMELINE.UNLOCK_START) / (TIMELINE.UNLOCK_END - TIMELINE.UNLOCK_START)
     const unlockProgress = clamp(rawProgress, 0, 1)
-
-    // Final Layout Logic
-    // When do we let the content scroll away?
-    // In Sticky mode, this happens naturally when the parent container ends.
-    // We just need to know if we are "done" to hide the sticky content layer if needed,
-    // but usually CSS handles the exit.
 
     return {
       avatarOpacity,
@@ -98,7 +90,8 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
       isLocked: scrollY >= TIMELINE.UNLOCK_START && scrollY < TIMELINE.UNLOCK_END,
       isComplete: scrollY >= TIMELINE.UNLOCK_END
     }
-  }, [scrollY])
+    // Dependency explicitly includes TIMELINE values to be safe, though they are constant here
+  }, [scrollY, TIMELINE.ENTRY_END, TIMELINE.UNLOCK_START, TIMELINE.UNLOCK_END])
 
   return (
     // Track: The tall container that creates the scroll space
@@ -107,10 +100,7 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
       className='relative w-full'
       style={{ height: `${TIMELINE.TOTAL_HEIGHT}px` }}
     >
-      {/* Sticky Window
-          This stays fixed to the viewport top until the parent (Track) is scrolled past.
-          No JS layout switching needed!
-      */}
+      {/* Sticky Window */}
       <div className='sticky top-0 left-0 w-full h-screen overflow-hidden'>
 
         {/* Background Layer (Video/Image) */}
@@ -119,7 +109,6 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
         </div>
 
         {/* --- Layer 1: Avatar (Hero) --- */}
-        {/* Moves up and fades out */}
         <div
           className='absolute inset-0 flex items-center justify-center pointer-events-none'
           style={{
@@ -139,14 +128,14 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
                     style={{ animationDuration: '3s' }} />
                 </div>
                 <img src='/avatar.jpeg' alt='AhogeK Avatar'
-                     className='relative w-24 h-24 rounded-full border-2 border-zinc-300 dark:border-white/50 object-cover shadow-2xl
+                     className='relative w-24 h-24 rounded-full border-2 border-white/50 object-cover shadow-2xl
                      hover:scale-110 transition-all duration-500 hover:border-orange-400' />
                 <div
                   className='absolute inset-0 w-24 h-24 rounded-full bg-linear-to-r from-orange-400 to-rose-500
                   opacity-0 hover:opacity-20 transition-opacity duration-300' />
               </div>
               {/* Text */}
-              <div className='text-4xl font-bold text-zinc-800 dark:text-white'>
+              <div className='text-4xl font-bold text-white'>
                 AhogeK 的 <span
                 className='text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-rose-500'>个人博客</span>
               </div>
@@ -155,7 +144,6 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
         </div>
 
         {/* --- Layer 2: Main Content --- */}
-        {/* Rises from bottom, settles at center, then holds */}
         <div
           className='absolute inset-0 flex items-start justify-center pointer-events-none'
           style={{
@@ -167,36 +155,29 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
             className='w-full max-w-4xl px-8 pointer-events-auto'
             style={{
               transform: anim.contentTransform,
-              // Use strictly linear transition or none to sync perfectly with scroll
-              // Adding transition here causes the "lag/floaty" feel.
-              // For scroll-driven anims, no transition is usually better!
               transition: 'none'
             }}
           >
             {/* The Card */}
             <div
               className='text-5xl md:text-6xl font-semibold text-center p-8 md:p-10 border-4 border-dashed
-              border-zinc-500/30 dark:border-white/40 rounded-xl backdrop-blur-sm
-              bg-white/40 dark:bg-black/10 text-zinc-800 dark:text-white'>
+              border-white/40 rounded-xl backdrop-blur-sm bg-black/10 text-white'>
               <div className='animate-pulse'>
                 网站开发中{/* */}
                 <span className='inline-block animate-bounce delay-75'>.</span>
                 <span className='inline-block animate-bounce delay-150'>.</span>
                 <span className='inline-block animate-bounce delay-300'>.</span>
               </div>
-
             </div>
 
             {/* Unlock Indicator (The Dots) */}
-            {/* Show during entry AND lock phase, hide when complete */}
             <div
               className='mt-8 text-center transition-opacity duration-500'
               style={{ opacity: anim.isComplete ? 0 : 1 }}
             >
               {/* Helper Text */}
               <div
-                className={`text-sm font-medium mb-2 transition-opacity duration-300
-                text-zinc-600 dark:text-white/90
+                className={`text-sm text-white/90 font-medium mb-2 transition-opacity duration-300 
                 ${anim.isLocked ? 'opacity-100' : 'opacity-0'}`}>
                 {anim.unlockProgress >= 0.99 ? '解锁成功' : '继续向下滚动解锁'}
               </div>
@@ -204,20 +185,16 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
               {/* Dots Container */}
               <div className='flex justify-center gap-2'>
                 {[0, 1, 2].map((i) => {
-                  // 3 dots, distribute progress 0-1 across them
-                  // Dot 0: 0.00 - 0.33
-                  // Dot 1: 0.33 - 0.66
-                  // Dot 2: 0.66 - 1.00
                   const dotThreshold = (i + 1) * 0.33
-                  // Add a small buffer so they don't flicker off immediately
                   const isActive = anim.unlockProgress > (dotThreshold - 0.1)
 
                   return (
                     <div
                       key={i}
-                      className={`w-3 h-3 rounded-full transition-all duration-200
-                      ${isActive ? 'bg-orange-400 scale-125' : 'bg-zinc-400 dark:bg-white/30 scale-100'}`}
+                      className='w-3 h-3 rounded-full transition-all duration-200'
                       style={{
+                        backgroundColor: isActive ? '#fb923c' : 'rgba(255,255,255,0.3)',
+                        transform: isActive ? 'scale(1.3)' : 'scale(1)',
                         boxShadow: isActive ? '0 0 10px rgba(251, 146, 60, 0.5)' : 'none'
                       }}
                     />
@@ -227,9 +204,8 @@ export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
 
               {/* Optional Arrow Hint */}
               <svg
-                className={`w-6 h-6 mx-auto mt-4 animate-bounce transition-opacity
-                duration-300 text-zinc-500 dark:text-white/50
-                ${anim.isLocked ? 'opacity-100' : 'opacity-0'}`}
+                className={`w-6 h-6 mx-auto mt-4 text-white/50 animate-bounce transition-opacity 
+                duration-300 ${anim.isLocked ? 'opacity-100' : 'opacity-0'}`}
                 fill='none' viewBox='0 0 24 24' stroke='currentColor'
               >
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 14l-7 7m0 0l-7-7m7 7V3' />
