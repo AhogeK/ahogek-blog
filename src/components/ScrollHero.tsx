@@ -12,7 +12,7 @@ interface ScrollHeroProps {
  * * 0px ------------------ 500px ------------------ 1200px ----------------> End
  * [    Entry Animation    ] [    Locked / Unlock    ] [ Natural Scroll Away ]
  */
-export default function ScrollHero({ children }: ScrollHeroProps) {
+export default function ScrollHero({ children }: Readonly<ScrollHeroProps>) {
   const [scrollY, setScrollY] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -139,14 +139,14 @@ export default function ScrollHero({ children }: ScrollHeroProps) {
                     style={{ animationDuration: '3s' }} />
                 </div>
                 <img src='/avatar.jpeg' alt='AhogeK Avatar'
-                     className='relative w-24 h-24 rounded-full border-2 border-white/50 object-cover shadow-2xl
+                     className='relative w-24 h-24 rounded-full border-2 border-zinc-300 dark:border-white/50 object-cover shadow-2xl
                      hover:scale-110 transition-all duration-500 hover:border-orange-400' />
                 <div
                   className='absolute inset-0 w-24 h-24 rounded-full bg-linear-to-r from-orange-400 to-rose-500
                   opacity-0 hover:opacity-20 transition-opacity duration-300' />
               </div>
               {/* Text */}
-              <div className='text-4xl font-bold text-white'>
+              <div className='text-4xl font-bold text-zinc-800 dark:text-white'>
                 AhogeK 的 <span
                 className='text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-rose-500'>个人博客</span>
               </div>
@@ -176,13 +176,15 @@ export default function ScrollHero({ children }: ScrollHeroProps) {
             {/* The Card */}
             <div
               className='text-5xl md:text-6xl font-semibold text-center p-8 md:p-10 border-4 border-dashed
-              border-white/40 rounded-xl backdrop-blur-sm bg-black/10 text-white'>
+              border-zinc-500/30 dark:border-white/40 rounded-xl backdrop-blur-sm
+              bg-white/40 dark:bg-black/10 text-zinc-800 dark:text-white'>
               <div className='animate-pulse'>
-                网站开发中
+                网站开发中{/* */}
                 <span className='inline-block animate-bounce delay-75'>.</span>
                 <span className='inline-block animate-bounce delay-150'>.</span>
                 <span className='inline-block animate-bounce delay-300'>.</span>
               </div>
+
             </div>
 
             {/* Unlock Indicator (The Dots) */}
@@ -193,7 +195,8 @@ export default function ScrollHero({ children }: ScrollHeroProps) {
             >
               {/* Helper Text */}
               <div
-                className={`text-sm text-white/90 font-medium mb-2 transition-opacity duration-300 
+                className={`text-sm font-medium mb-2 transition-opacity duration-300
+                text-zinc-600 dark:text-white/90
                 ${anim.isLocked ? 'opacity-100' : 'opacity-0'}`}>
                 {anim.unlockProgress >= 0.99 ? '解锁成功' : '继续向下滚动解锁'}
               </div>
@@ -212,10 +215,9 @@ export default function ScrollHero({ children }: ScrollHeroProps) {
                   return (
                     <div
                       key={i}
-                      className='w-3 h-3 rounded-full transition-all duration-200'
+                      className={`w-3 h-3 rounded-full transition-all duration-200
+                      ${isActive ? 'bg-orange-400 scale-125' : 'bg-zinc-400 dark:bg-white/30 scale-100'}`}
                       style={{
-                        backgroundColor: isActive ? '#fb923c' : 'rgba(255,255,255,0.3)',
-                        transform: isActive ? 'scale(1.3)' : 'scale(1)',
                         boxShadow: isActive ? '0 0 10px rgba(251, 146, 60, 0.5)' : 'none'
                       }}
                     />
@@ -225,8 +227,9 @@ export default function ScrollHero({ children }: ScrollHeroProps) {
 
               {/* Optional Arrow Hint */}
               <svg
-                className={`w-6 h-6 mx-auto mt-4 text-white/50 animate-bounce transition-opacity 
-                duration-300 ${anim.isLocked ? 'opacity-100' : 'opacity-0'}`}
+                className={`w-6 h-6 mx-auto mt-4 animate-bounce transition-opacity
+                duration-300 text-zinc-500 dark:text-white/50
+                ${anim.isLocked ? 'opacity-100' : 'opacity-0'}`}
                 fill='none' viewBox='0 0 24 24' stroke='currentColor'
               >
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 14l-7 7m0 0l-7-7m7 7V3' />
