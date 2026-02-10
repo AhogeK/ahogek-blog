@@ -11,6 +11,7 @@ import type { MarkdownInstance } from 'astro'
 import type { Frontmatter } from '../types'
 import ScrollHero from '@components/ScrollHero'
 import Video from '@components/Video'
+import ScrollToTop from '@components/ScrollToTop'
 
 const posts = (Object.values(
     import.meta.glob<MarkdownInstance<Frontmatter>>('./posts/*.md', { eager: true }))
@@ -49,6 +50,7 @@ const posts = (Object.values(
     </section>
   </Content>
 </main>
+<ScrollToTop client:load />
 <Footer />
 </Body>
 </html>
