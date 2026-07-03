@@ -6,7 +6,7 @@ interface SkillIconsProps {
   perLine?: string;    // 可选，每行显示的图标数量
 }
 
-const SKILL_ICONS_BASE_URL = 'https://skillicons.dev/icons'
+const SKILL_ICONS_BASE_URL = 'https://go-skill-icons.vercel.app/api/icons'
 
 const DynamicSkillIcons: React.FC<SkillIconsProps> = ({ skills, perLine }) => {
   // isMounted 状态，用于确保只在客户端渲染，避免 SSR 问题

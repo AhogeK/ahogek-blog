@@ -14,12 +14,6 @@
 
 ## 项目与工具约定
 
-- 任务跟踪使用 bd（beads）：
-    - bd onboard：初始化/上手
-    - bd ready：查看可做任务
-    - bd show <id>：查看任务详情
-    - bd update <id> --status in_progress：领取/标记进行中
-    - bd close <id>：完成关闭
 - 项目常用命令（开发/构建/预览）：
     - pnpm dev：启动开发服务
     - pnpm dev-host：启动开发服务（可局域网访问）
